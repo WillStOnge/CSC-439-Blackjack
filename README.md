@@ -1,12 +1,11 @@
 # Blackjack
 
-Project was written in Java with JavaDocs. Game runs from console and is not visual, but could be adapted to.
+Project was written in Java with JavaDocs. The game runs from the console.
 
 Developers:
-- Will St. Onge<sub>1</sub>
-- Alex Smithson 
-- Justin Gallagher<sub>2</sub>
+- Will St. Onge<sub><sub>1</sub></sub>
+- Justin Gallagher<sub><sub>2</sub></sub>
+- Alex Smithson
 
-<sub>1</sub> Lead Developer
-
-<sub>2</sub> Git Adminstrator
+<sub><sub>1</sub></sub><small>Lead Developer</small><br>
+<sub><sub>2</sub></sub><small>Git Administrator</small>
