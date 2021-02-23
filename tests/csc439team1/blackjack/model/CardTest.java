@@ -15,6 +15,7 @@ public class CardTest
 		{
 			card = new Card(number, Suit.SPADES);
 			assertThat(card.getNumber(), is(number));
+			assertThat(card.getNumber().toString(), isA(String.class));
 		}
 	}
 
@@ -27,6 +28,7 @@ public class CardTest
 		{
 			card = new Card(Number.ACE, suit);
 			assertThat(card.getSuit(), is(suit));
+			assertThat(card.getSuit().toString(), isA(String.class));
 		}
 	}
 }
