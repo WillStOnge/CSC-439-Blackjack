@@ -1,6 +1,7 @@
 package csc439team1.blackjack.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The Hand class is used to hold the current cards held by a player.
@@ -10,14 +11,14 @@ import java.util.ArrayList;
  */
 public class Hand
 {
-	private ArrayList<Card> cards;
+	private final List<Card> cards;
 
 	/**
 	 * Hand class constructor that sets up the internal card list.
 	 */
 	public Hand()
 	{
-		this.cards = new ArrayList<>();
+		cards = new ArrayList<>();
 	}
 
 	/**
@@ -25,7 +26,7 @@ public class Hand
 	 *
 	 * @return the collection of cards.
 	 */
-	public ArrayList<Card> getCards()
+	public List<Card> getCards()
 	{
 		return cards;
 	}
