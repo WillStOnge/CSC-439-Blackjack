@@ -12,20 +12,21 @@ import java.util.List;
  * deck is the data structure that represents the deck
  *
  * @author Alex Smithson
- * @version 0.1
+ * @version 0.2
  */
-public class Deck {
-
+public class Deck
+{
     private List<Card> deck;
 
     /**
      * The Deck class constructor creates the List that represents the deck
      * and populates it with 52 unique Card instances
      */
-    public Deck(){
+    public Deck()
+    {
         deck = new ArrayList<Card>();
 
-        for(Number curNumber : Number.values())
+        for (Number curNumber : Number.values())
             for (Suit curSuit : Suit.values())
                 deck.add(new Card(curNumber, curSuit));
     }
@@ -37,10 +38,11 @@ public class Deck {
      * @return a randomly selected card
      * @throws NoSuchObjectException if there are no cards left in the deck.
      */
-    public Card pick() throws NoSuchObjectException{
+    public Card pick() throws NoSuchObjectException
+    {
         Card returnCard;
 
-        if(deck.size() == 0)
+        if (deck.size() == 0)
             throw new NoSuchObjectException("The deck is empty");
 
         returnCard = deck.get((int) Math.random() * deck.size());
@@ -51,9 +53,11 @@ public class Deck {
 
     /**
      * This method returns the size of the List, deck.
+     *
      * @return deck.size()
      */
-    public int size(){
+    public int size()
+    {
         return deck.size();
     }
 }
