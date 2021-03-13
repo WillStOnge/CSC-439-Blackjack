@@ -1,6 +1,7 @@
 package csc439team1.blackjack.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.rmi.NoSuchObjectException;
 
@@ -11,10 +12,10 @@ import java.rmi.NoSuchObjectException;
  * @author Justin Gallagher
  * @version 0.2
  */
-public class Shoe {
-
-    private final Random rand = new Random();
-    private final ArrayList<Deck> shoe = new ArrayList<>();
+public class Shoe
+{
+    private final Random rand;
+    private final List<Deck> shoe;
 
     /**
      * The Shoe class constructor creates a shoe collection of decks using the numDecks variable
@@ -22,10 +23,13 @@ public class Shoe {
      *
      * @param numDecks number of shoe
      */
-    public Shoe(int numDecks) {
-        for (int i = 0; i < numDecks; i++) {
+    public Shoe(int numDecks)
+    {
+        rand = new Random();
+        shoe = new ArrayList<>();
+
+        for (int i = 0; i < numDecks; i++)
             shoe.add(new Deck());
-        }
     }
 
     /**
@@ -33,15 +37,17 @@ public class Shoe {
      *
      * @return a randomly picked card from a deck in the shoe collection
      */
-    public Card pick() throws NoSuchObjectException {
-        if (shoe.size() == 0) {
+    public Card pick() throws NoSuchObjectException
+    {
+        if (shoe.size() == 0)
             throw new NoSuchObjectException("Shoe empty, no decks found.");
-        }
+
         Deck pickedDeck = shoe.get(rand.nextInt(shoe.size()));
         Card pickedCard = pickedDeck.pick();
-        if (pickedDeck.size() == 0) {
+
+        if (pickedDeck.size() == 0)
             shoe.remove(pickedDeck);
-        }
+
         return pickedCard;
     }
 
@@ -50,7 +56,8 @@ public class Shoe {
      *
      * @return the number of decks in the shoe collection
      */
-    public int numDecks() {
+    public int numDecks()
+    {
         return shoe.size();
     }
 
@@ -59,13 +66,13 @@ public class Shoe {
      *
      * @return the number of cards in the shoe collection
      */
-    public int size() {
+    public int size()
+    {
         int numCards = 0;
 
-        for (Deck deck : shoe) {
+        for (Deck deck : shoe)
             numCards += deck.size();
-        }
+
         return numCards;
     }
-
 }
