@@ -3,6 +3,7 @@ package csc439team1.blackjack.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.lang.IllegalStateException;
 
 /**
  * The Deck class is used to create an instance that represents a
@@ -46,7 +47,7 @@ public class Deck
         if (deck.size() == 0)
             throw new IllegalStateException("The deck is empty");
 
-        returnCard = deck.get(rand.nextInt() * deck.size());
+        returnCard = deck.get(rand.nextInt(deck.size()));
         deck.remove(returnCard);
 
         return returnCard;
