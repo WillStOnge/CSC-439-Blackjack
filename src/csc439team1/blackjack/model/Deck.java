@@ -5,26 +5,29 @@ import java.util.List;
 import java.util.Random;
 
 /**
-     * The Deck class is used to create an instance that represents a
-     * deck of playing cards and includes the following properties:
-     *
-     * deck is of type List and represents the deck
-     *
-     * @author Alex Smithson
-     * @version 0.2
-     */
-    public class Deck {
-
+ * The Deck class is used to create an instance that represents a
+ * deck of playing cards and includes the following properties:
+ *
+ * deck is of type List and represents the deck
+ *
+ * @author Alex Smithson
+ * @version 0.2
+ */
+public class Deck
+{
     private final List<Card> deck;
+    private final Random rand;
 
     /**
      * The Deck class constructor creates the List that represents the deck
      * and populates it with 52 unique Card instances
      */
-    public Deck(){
+    public Deck()
+    {
         deck = new ArrayList<>();
+        rand = new Random();
 
-        for(Number curNumber : Number.values())
+        for (Number curNumber : Number.values())
             for (Suit curSuit : Suit.values())
                 deck.add(new Card(curNumber, curSuit));
     }
@@ -36,14 +39,14 @@ import java.util.Random;
      * @return a randomly selected card
      * @throws IllegalStateException if there are no cards left in the deck.
      */
-    public Card pick() {
+    public Card pick()
+    {
         Card returnCard;
-        Random random = new Random();
 
-        if(deck.size() == 0)
+        if (deck.size() == 0)
             throw new IllegalStateException("The deck is empty");
 
-        returnCard = deck.get(random.nextInt() * deck.size());
+        returnCard = deck.get(rand.nextInt() * deck.size());
         deck.remove(returnCard);
 
         return returnCard;
@@ -51,9 +54,11 @@ import java.util.Random;
 
     /**
      * This method returns the size of the List, deck.
+     *
      * @return deck.size()
      */
-    public int size(){
+    public int size()
+    {
         return deck.size();
     }
 }
