@@ -1,22 +1,23 @@
 package csc439team1.blackjack.model;
 
-import java.rmi.NoSuchObjectException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.lang.IllegalStateException;
 
 /**
  * The Deck class is used to create an instance that represents a
  * deck of playing cards and includes the following properties:
  *
- * numCards is the number of cards remaining in the deck
- * deck is the data structure that represents the deck
+ * deck is of type List and represents the deck
  *
  * @author Alex Smithson
  * @version 0.2
  */
 public class Deck
 {
-    private List<Card> deck;
+    private final List<Card> deck;
+    private final Random rand;
 
     /**
      * The Deck class constructor creates the List that represents the deck
@@ -24,7 +25,8 @@ public class Deck
      */
     public Deck()
     {
-        deck = new ArrayList<Card>();
+        deck = new ArrayList<>();
+        rand = new Random();
 
         for (Number curNumber : Number.values())
             for (Suit curSuit : Suit.values())
@@ -36,16 +38,16 @@ public class Deck
      * and removes it from the List, deck.
      *
      * @return a randomly selected card
-     * @throws NoSuchObjectException if there are no cards left in the deck.
+     * @throws IllegalStateException if there are no cards left in the deck.
      */
-    public Card pick() throws NoSuchObjectException
+    public Card pick()
     {
         Card returnCard;
 
         if (deck.size() == 0)
-            throw new NoSuchObjectException("The deck is empty");
+            throw new IllegalStateException("The deck is empty");
 
-        returnCard = deck.get((int) Math.random() * deck.size());
+        returnCard = deck.get(rand.nextInt(deck.size()));
         deck.remove(returnCard);
 
         return returnCard;
