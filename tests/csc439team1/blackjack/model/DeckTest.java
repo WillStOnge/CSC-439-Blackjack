@@ -3,11 +3,11 @@ package csc439team1.blackjack.model;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class DeckTest {
-
-
+public class DeckTest
+{
     @Test
-    public void createAndPickTest(){
+    public void createAndPickTest()
+    {
         Deck deck = new Deck();
 
         assertEquals(deck.size(), 52);
@@ -17,7 +17,8 @@ public class DeckTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    public void pickExceptionTest() {
+    public void pickExceptionTest()
+    {
         Deck deck = new Deck();
         for (int i = 0; i < 53; i++)
             deck.pick();
