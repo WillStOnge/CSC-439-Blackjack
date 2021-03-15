@@ -2,12 +2,12 @@ package csc439team1.blackjack.model;
 
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.rmi.NoSuchObjectException;
+import java.lang.IllegalStateException;
 
 public class ShoeTest
 {
-    @Test(expected = NoSuchObjectException.class)
-    public void pickExceptionTest() throws NoSuchObjectException
+    @Test(expected = IllegalStateException.class)
+    public void pickExceptionTest()
     {
         int numDecks = 0;
         Shoe shoe = new Shoe(numDecks);
@@ -15,7 +15,7 @@ public class ShoeTest
     }
 
     @Test
-    public void testPick() throws NoSuchObjectException
+    public void testPick()
     {
         int numDecks = 2;
         Shoe shoe = new Shoe(numDecks);

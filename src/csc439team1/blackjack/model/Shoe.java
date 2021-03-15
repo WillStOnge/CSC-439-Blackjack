@@ -3,7 +3,7 @@ package csc439team1.blackjack.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.rmi.NoSuchObjectException;
+import java.lang.IllegalStateException;
 
 /**
  * The Shoe class represents a shoe object in the game of Blackjack.
@@ -37,10 +37,10 @@ public class Shoe
      *
      * @return a randomly picked card from a deck in the shoe collection
      */
-    public Card pick() throws NoSuchObjectException
+    public Card pick()
     {
         if (shoe.size() == 0)
-            throw new NoSuchObjectException("Shoe empty, no decks found.");
+            throw new IllegalStateException("Shoe empty, no decks found.");
 
         Deck pickedDeck = shoe.get(rand.nextInt(shoe.size()));
         Card pickedCard = pickedDeck.pick();
