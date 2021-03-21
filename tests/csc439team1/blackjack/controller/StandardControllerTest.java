@@ -4,6 +4,6 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.CoreMatchers.*;
 
-public class ControllerTest
+public class StandardControllerTest
 {
 }
