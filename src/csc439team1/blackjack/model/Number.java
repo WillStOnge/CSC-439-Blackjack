@@ -30,7 +30,7 @@ public enum Number
 	 * Number enum constructor that sets the name of the number.
 	 *
 	 * @param name represents the name of the number.
-	 * @param value
+	 * @param value integer value of the card.
 	 */
 	Number(String name, int value)
 	{
