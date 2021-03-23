@@ -12,6 +12,7 @@ public class Card
 {
     private final Number number;
     private final Suit suit;
+    private final boolean hidden;
 
     /**
      * Card class constructor that sets the number and suit of the card.
@@ -23,6 +24,21 @@ public class Card
     {
         this.number = number;
         this.suit = suit;
+        this.hidden = false;
+    }
+
+    /**
+     * Card class constructor that sets the number and suit of the card.
+     *
+     * @param number represents the number of the card
+     * @param suit   represents the suit of the card
+     * @param hidden whether the card should be hidden or not.
+     */
+    public Card(Number number, Suit suit, boolean hidden)
+    {
+        this.number = number;
+        this.suit = suit;
+        this.hidden = hidden;
     }
 
     /**
@@ -43,6 +59,16 @@ public class Card
     public Suit getSuit()
     {
         return suit;
+    }
+
+    /**
+     * Returns whether a card is hidden or not.
+     *
+     * @return whether a card is hidden or not.
+     */
+    public boolean isHidden()
+    {
+        return hidden;
     }
 }
 

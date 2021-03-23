@@ -50,4 +50,34 @@ public class Hand
 	{
 		return cards.size();
 	}
+
+	/**
+	 * Scores the deck.
+	 *
+	 * @return the score(s) of the deck.
+	 */
+	public int score()
+	{
+		int score = 0, aces = 0;
+		Number number;
+
+		// Computes the score of the deck (ace is always 11).
+		for (Card card : cards)
+		{
+			number = card.getNumber();
+			score += number.getValue();
+
+			if (number == Number.ACE)
+				aces++;
+		}
+
+		// Subtract 10 for each ace if we are over 21.
+		while (score > 21 && aces > 0)
+		{
+			score -= 10;
+			aces--;
+		}
+
+		return score;
+	}
 }

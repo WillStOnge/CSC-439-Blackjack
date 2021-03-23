@@ -26,9 +26,10 @@ public class CardTest
 
 		for (Suit suit : Suit.values())
 		{
-			card = new Card(Number.ACE, suit);
+			card = new Card(Number.ACE, suit, false);
 			assertThat(card.getSuit(), is(suit));
 			assertThat(card.getSuit().toString(), isA(String.class));
+			assertThat(card.isHidden(), is(false));
 		}
 	}
 }
