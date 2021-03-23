@@ -11,10 +11,10 @@ import csc439team1.blackjack.view.View;
  */
 public class StandardController
 {
-	private Player player;
-	private Dealer dealer;
-	private Shoe shoe;
-	private View view;
+	private final Player player;
+	private final Dealer dealer;
+	private final Shoe shoe;
+	private final View view;
 
 	/**
 	 * Constructs a new standard controller. Call start() to start playing blackjack.
