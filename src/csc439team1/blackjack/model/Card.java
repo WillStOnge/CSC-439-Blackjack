@@ -12,7 +12,7 @@ public class Card
 {
     private final Number number;
     private final Suit suit;
-    private final boolean hidden;
+    private boolean hidden;
 
     /**
      * Card class constructor that sets the number and suit of the card.
@@ -69,6 +69,16 @@ public class Card
     public boolean isHidden()
     {
         return hidden;
+    }
+
+    /**
+     * Sets the hidden value of the card.
+     *
+     * @param hidden whether a card is hidden or not.
+     */
+    public void setHidden(boolean hidden)
+    {
+        this.hidden = hidden;
     }
 }
 

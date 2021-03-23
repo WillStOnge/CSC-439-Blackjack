@@ -32,4 +32,13 @@ public class CardTest
 			assertThat(card.isHidden(), is(false));
 		}
 	}
+
+	@Test
+	public void setHiddenTest()
+	{
+		Card card = new Card(Number.ACE, Suit.SPADES);
+		card.setHidden(true);
+
+		assertThat(card.isHidden(), is(true));
+	}
 }
