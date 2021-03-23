@@ -17,7 +17,7 @@ public class StandardController
 	private final View view;
 
 	/**
-	 * Constructs a new standard controller. Call start() to start playing blackjack.
+	 * Constructs a new standard controller. Call playBlackjack() to start playing blackjack.
 	 *
 	 * @param view The view to use for prompting the player.
 	 */
@@ -32,7 +32,7 @@ public class StandardController
 	/**
 	 * Starts the game and loops until the game is over.
 	 */
-	public void start()
+	public void playBlackjack()
 	{
 		boolean keepPlaying = true;
 
@@ -51,7 +51,7 @@ public class StandardController
 	 */
 	public void placeBet()
 	{
-		float bet = 0; // TODO Prompt player for bet.
+		int bet = 0; // TODO Prompt player for bet.
 		// TODO Reduce chips from player and set their bet.
 	}
 
@@ -60,7 +60,7 @@ public class StandardController
 	 */
 	public void buyChips()
 	{
-		// TODO Prompt player for the number of chips wanted and adds them to their object.
+		int chips = 0;// TODO Prompt player for the number of chips wanted and adds them to their object.
 		// TODO Also need to remove the appropriate money from their object.
 	}
 
