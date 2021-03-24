@@ -40,7 +40,38 @@ public class StandardController
 
 		while (keepPlaying)
 		{
-			// TODO Add additional game logic
+			Action action;
+
+			placeBet();
+
+			// Deal initial cards to dealer and player
+			dealCard(player);
+			dealCard(player);
+			dealCard(dealer, true);
+			dealCard(dealer);
+
+			// TODO Check for a blackjack.
+
+			// TODO Check for win/tie and prompt for retry.
+
+			// TODO Determine what actions are allowed.
+
+			// TODO Prompt the player with which action they wish to take, then execute it.
+
+			// TODO Uhhh, bust check?
+
+			// Keep prompting the player until they stand or bust.
+			while ((action = getNextAction(Action.HIT, Action.STAND)) != Action.STAND)
+			{
+				dealCard(player);
+				// TODO Display hit message and hand
+
+				// TODO Check for a bust.
+			}
+
+			// TODO Deal cards to the dealer until they are >= 17
+
+			// TODO Determine the winner (check both for busts, then compare their scores).
 
 			keepPlaying = keepPlaying();
 		}
@@ -69,7 +100,7 @@ public class StandardController
 	 *
 	 * @param player the player to deal the card to.
 	 */
-	public void dealCard(Player player)
+	public void dealCard(PlayerBase player)
 	{
 		dealCard(player, false);
 	}
@@ -80,14 +111,15 @@ public class StandardController
 	 * @param player the player to deal the card to.
 	 * @param hidden determines whether or not the card will be face up or down.
 	 */
-	public void dealCard(Player player, boolean hidden)
+	public void dealCard(PlayerBase player, boolean hidden)
 	{
 		Card card = shoe.pick();
+		card.setHidden(hidden);
 		// TODO Deal the card to the player.
 	}
 
 	/**
-	 * Prompts the player to see if they want to continue playing.
+	 * Prompts the player to see if they want to continue playing after the end of a round.
 	 *
 	 * @return whether the player wants to continue playing or not.
 	 */
