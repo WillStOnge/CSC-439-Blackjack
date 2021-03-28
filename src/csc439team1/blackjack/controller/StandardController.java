@@ -1,7 +1,7 @@
 package csc439team1.blackjack.controller;
 
 import csc439team1.blackjack.model.*;
-import csc439team1.blackjack.view.View;
+import csc439team1.blackjack.view.ViewBase;
 
 /**
  * The standard blackjack controller. This is the brains of the program and contains all of the core game logic.
@@ -9,29 +9,27 @@ import csc439team1.blackjack.view.View;
  * @author Will St. Onge
  * @version 0.3
  */
-public class StandardController
+public class StandardController extends ControllerBase
 {
 	private final Player player;
-	private final Dealer dealer;
 	private final Shoe shoe;
-	private final View view;
 
 	/**
 	 * Constructs a new standard controller. Call playBlackjack() to start playing blackjack.
 	 *
 	 * @param view The view to use for prompting the player.
 	 */
-	public StandardController(View view)
+	public StandardController(ViewBase view)
 	{
+		super(view);
 		player = new Player();
-		dealer = new Dealer();
 		shoe = new Shoe(3);
-		this.view = view;
 	}
 
 	/**
 	 * Starts the game and loops until the game is over.
 	 */
+	@Override
 	public void playBlackjack()
 	{
 		boolean keepPlaying = true;
@@ -50,28 +48,44 @@ public class StandardController
 			dealCard(dealer, true);
 			dealCard(dealer);
 
-			// TODO Check for a blackjack.
+			// TODO Determine what actions are allowed (Double?).
 
-			// TODO Check for win/tie and prompt for retry.
-
-			// TODO Determine what actions are allowed.
-
-			// TODO Prompt the player with which action they wish to take, then execute it.
-
-			// TODO Uhhh, bust check?
-
-			// Keep prompting the player until they stand or bust.
-			while ((action = getNextAction(Action.HIT, Action.STAND)) != Action.STAND)
+			// Keep prompting the player until they stand, bust, or reach a score of 21.
+			while ((action = getNextAction(Action.HIT, Action.STAND)) != Action.STAND && player.score() < 21)
 			{
 				dealCard(player);
-				// TODO Display hit message and hand
-
-				// TODO Check for a bust.
+				// TODO Display hit message and hand.
 			}
 
-			// TODO Deal cards to the dealer until they are >= 17
+			// Deal cards to the dealer until their score is >= 17.
+			while (dealer.score() < 17)
+				dealCard(dealer);
 
-			// TODO Determine the winner (check both for busts, then compare their scores).
+			// Check for any busts.
+			if (player.score() > 21)
+			{
+				// TODO dealer wins, player bust.
+			}
+			else if (dealer.score() > 21)
+			{
+				// TODO player wins, dealer bust.
+			}
+			else
+			{
+				// If nobody busted, check for the winner or a push.
+				if (dealer.score() > player.score())
+				{
+					// TODO dealer wins.
+				}
+				else if (dealer.score() < player.score())
+				{
+					// TODO player wins.
+				}
+				else
+				{
+					// TODO tie, nothing happens.
+				}
+			}
 
 			keepPlaying = keepPlaying();
 		}
@@ -96,7 +110,7 @@ public class StandardController
 	}
 
 	/**
-	 * Deals a random face-up card from the shoe to the player.
+	 * Deals a random, face-up card from the shoe to the player.
 	 *
 	 * @param player the player to deal the card to.
 	 */
@@ -113,9 +127,19 @@ public class StandardController
 	 */
 	public void dealCard(PlayerBase player, boolean hidden)
 	{
-		Card card = shoe.pick();
+		Card card = null;
+
+		try
+		{
+			card = shoe.pick();
+		}
+		catch (IllegalStateException e)
+		{
+
+		}
+
 		card.setHidden(hidden);
-		// TODO Deal the card to the player.
+		player.addCard(card);
 	}
 
 	/**
