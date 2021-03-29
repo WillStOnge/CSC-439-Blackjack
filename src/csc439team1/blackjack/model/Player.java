@@ -25,7 +25,9 @@ public class Player extends PlayerBase
 	}
 
 	/**
-	 * @return the player's number of chips
+	 * Retrieves the number of chips held by the player.
+	 *
+	 * @return the player's number of chips.
 	 */
 	public int getNumChips()
 	{
@@ -33,7 +35,9 @@ public class Player extends PlayerBase
 	}
 
 	/**
-	 * @param numChips is assigned to the number of chips a player has
+	 * Sets the players chip count.
+	 *
+	 * @param numChips is assigned to the number of chips a player has.
 	 */
 	public void setNumChips(int numChips)
 	{
@@ -41,7 +45,9 @@ public class Player extends PlayerBase
 	}
 
 	/**
-	 * add to the player's number of chips
+	 * Add to the player's number of chips.
+	 *
+	 * @param addedChips Number of chips to add.
 	 */
 	public void addChips(int addedChips)
 	{
@@ -49,14 +55,18 @@ public class Player extends PlayerBase
 	}
 
 	/**
-	 * take away player's chips
+	 * Take away player's chips
+	 *
+	 * @param lostChips Number of chips to take away.
 	 */
 	public void loseChips(int lostChips)
 	{
-		numChips-= lostChips;
+		numChips -= lostChips;
 	}
 
 	/**
+	 * Retrieves the current bet of the player.
+	 *
 	 * @return the players bet value
 	 */
 	public int getBet()
@@ -65,8 +75,9 @@ public class Player extends PlayerBase
 	}
 
 	/**
+	 * Sets the players bet.
 	 *
-	 * @param newBetValue is a new
+	 * @param newBetValue the bet value of the player.
 	 */
 	public void setBet(int newBetValue) {
 		bet = newBetValue;

@@ -27,17 +27,8 @@ public class StandardController extends ControllerBase
 	}
 
 	/**
-	 * Default no-args, constructor for full coverage of the abstract class.
-	 */
-	public StandardController()
-	{
-		super();
-		player = new Player();
-		shoe = new Shoe(3);
-	}
-
-	/**
 	 * Starts the game and loops until the game is over.
+	 * The game can end if the player doesn't wish to continue or they run out of chips.
 	 */
 	@Override
 	public void playBlackjack()
@@ -97,6 +88,13 @@ public class StandardController extends ControllerBase
 				}
 			}
 
+			// Check if the player has run out of chips.
+			if (player.getNumChips() <= 0)
+			{
+				// TODO Print game over.
+				break;
+			}
+
 			// Check if player wishes to continue playing.
 			keepPlaying = keepPlaying();
 		}
@@ -109,7 +107,14 @@ public class StandardController extends ControllerBase
 	{
 		// TODO Prompt player for bet.
 		int bet = 0;
-		// TODO Reduce chips from player and set their bet.
+
+		if (bet > player.getNumChips())
+			throw new IllegalArgumentException("Bet must be less than equal to the number of chips held.");
+		if (bet < 10 || bet > 500)
+			throw new IllegalArgumentException("Bet must be between 10 and 500.");
+
+		player.setBet(bet);
+		player.loseChips(bet);
 	}
 
 	/**
@@ -119,7 +124,7 @@ public class StandardController extends ControllerBase
 	{
 		// TODO Prompt player for the number of chips.
 		int chips = 0;
-		player.setNumChips(chips);
+		player.addChips(chips);
 	}
 
 	/**
@@ -159,11 +164,12 @@ public class StandardController extends ControllerBase
 	/**
 	 * Displays the hand and score of a player or the dealer.
 	 *
-	 * @param hand The hand to be displayed.
+	 * @param player the player whose hand should be displayed.
 	 */
-	public void showHand(Hand hand)
+	public void showHand(PlayerBase player)
 	{
-		int score = hand.score();
+		int score = player.score();
+		Hand hand = player.getHand();
 		// TODO Print the deck and its score.
 	}
 

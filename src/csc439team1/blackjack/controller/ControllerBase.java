@@ -1,7 +1,6 @@
 package csc439team1.blackjack.controller;
 
 import csc439team1.blackjack.model.Dealer;
-import csc439team1.blackjack.view.CLIView;
 import csc439team1.blackjack.view.ViewBase;
 
 /**
@@ -24,14 +23,6 @@ public abstract class ControllerBase
 	{
 		this.view = view;
 		this.dealer = new Dealer();
-	}
-
-	/**
-	 * Default, no-args constructor for Controller.
-	 */
-	protected ControllerBase()
-	{
-		this(new CLIView());
 	}
 
 	/**

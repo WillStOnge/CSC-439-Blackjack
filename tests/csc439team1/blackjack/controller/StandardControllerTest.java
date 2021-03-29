@@ -10,13 +10,6 @@ import static org.hamcrest.CoreMatchers.*;
 public class StandardControllerTest
 {
 	@Test
-	public void playBlackjack()
-	{
-		StandardController controller = new StandardController();
-		controller.playBlackjack();
-	}
-
-	@Test
 	public void placeBet()
 	{
 		StandardController controller = new StandardController(new CLIView());
@@ -60,7 +53,7 @@ public class StandardControllerTest
 	{
 		StandardController controller = new StandardController(new CLIView());
 		Player player = new Player();
-		controller.showHand(player.getHand());
+		controller.showHand(player);
 	}
 
 	@Test
