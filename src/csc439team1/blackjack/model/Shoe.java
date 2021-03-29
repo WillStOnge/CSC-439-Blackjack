@@ -3,7 +3,6 @@ package csc439team1.blackjack.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.lang.IllegalStateException;
 
 /**
  * The Shoe class represents a shoe object in the game of Blackjack.

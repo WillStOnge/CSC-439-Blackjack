@@ -1,8 +1,5 @@
 package csc439team1.blackjack.model;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 /**
  * Represents the player who has a number of chips and may place a bet
  *

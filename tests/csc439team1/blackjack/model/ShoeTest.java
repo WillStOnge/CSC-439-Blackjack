@@ -1,8 +1,9 @@
 package csc439team1.blackjack.model;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
-import java.lang.IllegalStateException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class ShoeTest
 {

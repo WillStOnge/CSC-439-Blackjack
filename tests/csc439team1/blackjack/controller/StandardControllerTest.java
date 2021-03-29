@@ -4,8 +4,9 @@ import csc439team1.blackjack.model.Action;
 import csc439team1.blackjack.model.Player;
 import csc439team1.blackjack.view.CLIView;
 import org.junit.Test;
-import static org.hamcrest.MatcherAssert.*;
-import static org.hamcrest.CoreMatchers.*;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StandardControllerTest
 {
