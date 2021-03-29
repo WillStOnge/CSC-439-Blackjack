@@ -6,5 +6,8 @@ import static org.hamcrest.CoreMatchers.*;
 
 public class BlackjackTest
 {
-
+    @Test
+    public void mainTest(){
+        Blackjack.main(null);
+    }
 }

@@ -8,11 +8,17 @@ import static org.hamcrest.CoreMatchers.*;
 public class PlayerTest
 {
 	@Test
-	public void placeBetTest()
+	public void initTest(){
+		Player player = new Player();
+		Assert.assertNotNull(player);
+	}
+
+	@Test
+	public void setBetTest()
 	{
 		Player player = new Player();
-		int bet = player.placeBet();
-		Assert.assertTrue(bet >= 10 && bet <= 500);
+		player.setBet(1);
+		Assert.assertEquals(1, player.getBet());
 	}
 
 	@Test
@@ -21,6 +27,20 @@ public class PlayerTest
 		Player player = new Player();
 		player.setNumChips(10);
 		Assert.assertEquals(10, player.getNumChips());
+	}
+
+	@Test
+	public void addChipsTest(){
+		Player player = new Player();
+		player.addChips(1);
+		Assert.assertEquals(1, player.getNumChips());
+	}
+
+	@Test
+	public void loseChipsTest(){
+		Player player = new Player();
+		player.loseChips(1);
+		Assert.assertEquals(-1, player.getNumChips());
 	}
 
 	@Test
