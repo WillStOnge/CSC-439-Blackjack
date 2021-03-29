@@ -27,6 +27,16 @@ public class StandardController extends ControllerBase
 	}
 
 	/**
+	 * Default no-args, constructor for full coverage of the abstract class.
+	 */
+	public StandardController()
+	{
+		super();
+		player = new Player();
+		shoe = new Shoe(3);
+	}
+
+	/**
 	 * Starts the game and loops until the game is over.
 	 */
 	@Override
@@ -87,6 +97,7 @@ public class StandardController extends ControllerBase
 				}
 			}
 
+			// Check if player wishes to continue playing.
 			keepPlaying = keepPlaying();
 		}
 	}
@@ -96,7 +107,8 @@ public class StandardController extends ControllerBase
 	 */
 	public void placeBet()
 	{
-		int bet = 0; // TODO Prompt player for bet.
+		// TODO Prompt player for bet.
+		int bet = 0;
 		// TODO Reduce chips from player and set their bet.
 	}
 
@@ -105,8 +117,9 @@ public class StandardController extends ControllerBase
 	 */
 	public void buyChips()
 	{
-		int chips = 0;// TODO Prompt player for the number of chips wanted and adds them to their object.
-		// TODO Also need to remove the appropriate money from their object.
+		// TODO Prompt player for the number of chips.
+		int chips = 0;
+		player.setNumChips(chips);
 	}
 
 	/**
@@ -127,17 +140,7 @@ public class StandardController extends ControllerBase
 	 */
 	public void dealCard(PlayerBase player, boolean hidden)
 	{
-		Card card = null;
-
-		try
-		{
-			card = shoe.pick();
-		}
-		catch (IllegalStateException e)
-		{
-
-		}
-
+		Card card = shoe.pick();
 		card.setHidden(hidden);
 		player.addCard(card);
 	}

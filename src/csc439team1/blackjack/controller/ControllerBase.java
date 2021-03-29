@@ -18,7 +18,7 @@ public abstract class ControllerBase
 	/**
 	 * Controller constructor which allows the user to specify the view type.
 	 *
-	 * @param view
+	 * @param view the desired view for user interaction.
 	 */
 	protected ControllerBase(ViewBase view)
 	{
@@ -31,8 +31,7 @@ public abstract class ControllerBase
 	 */
 	protected ControllerBase()
 	{
-		this.view = new CLIView();
-		this.dealer = new Dealer();
+		this(new CLIView());
 	}
 
 	/**
