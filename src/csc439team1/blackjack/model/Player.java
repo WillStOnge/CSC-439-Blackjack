@@ -11,7 +11,6 @@ import java.util.Scanner;
  */
 public class Player extends PlayerBase
 {
-	// Needs to have info about the number of chips, the bet, and methods to increment/decrement those variables.
 	private int numChips;
 	private int bet;
 
@@ -21,6 +20,8 @@ public class Player extends PlayerBase
 	public Player()
 	{
 		super();
+		numChips = 0;
+		bet = 0;
 	}
 
 	/**
@@ -40,19 +41,19 @@ public class Player extends PlayerBase
 	}
 
 	/**
-	 * increment the player's number of chips
+	 * add to the player's number of chips
 	 */
-	public void addChip()
+	public void addChips(int addedChips)
 	{
-		numChips++;
+		numChips += addedChips;
 	}
 
 	/**
-	 * take away a player's chip
+	 * take away player's chips
 	 */
-	public void loseChip()
+	public void loseChips(int lostChips)
 	{
-		numChips--;
+		numChips-= lostChips;
 	}
 
 	/**
@@ -64,41 +65,10 @@ public class Player extends PlayerBase
 	}
 
 	/**
-	 * This method prompts the user to place a bet between $10 and $500
+	 *
+	 * @param newBetValue is a new
 	 */
-	public int placeBet()
-	{
-		Scanner scanner = new Scanner(System.in);
-		bet = 0;
-		while (bet < 10 || bet > 500)
-		{
-			System.out.println("Player: Please place a bet between $10 - $500:");
-			try
-			{
-				bet = scanner.nextInt();
-			} catch (InputMismatchException e)
-			{
-				System.out.println("Please enter your bet as an integer value, ex: 50");
-			}
-		}
-		scanner.close();
-
-		return bet;
-	}
-
-	/**
-	 * This method increments the player's bet by $1
-	 */
-	public void upBet()
-	{
-		bet++;
-	}
-
-	/**
-	 * This method decrements the player's bet by $1
-	 */
-	public void lowerBet()
-	{
-		bet--;
+	public void setBet(int newBetValue) {
+		bet = newBetValue;
 	}
 }
