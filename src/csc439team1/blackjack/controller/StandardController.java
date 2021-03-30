@@ -33,6 +33,7 @@ public class StandardController extends ControllerBase
 	@Override
 	public void playBlackjack()
 	{
+		// TODO Start game output.
 		boolean keepPlaying = true;
 
 		buyChips();
@@ -55,7 +56,8 @@ public class StandardController extends ControllerBase
 			while ((action = getNextAction(Action.HIT, Action.STAND)) != Action.STAND && player.score() < 21)
 			{
 				dealCard(player);
-				// TODO Display hit message and hand.
+				// TODO Display hit message.
+				showHand(player);
 			}
 
 			// Deal cards to the dealer until their score is >= 17.
@@ -89,7 +91,7 @@ public class StandardController extends ControllerBase
 			}
 
 			// Check if the player has run out of chips.
-			if (player.getNumChips() <= 0)
+			if (player.getNumChips() <= 0 || shoe.size() == 0)
 			{
 				// TODO Print game over.
 				break;
