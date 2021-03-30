@@ -76,7 +76,8 @@ public class Player extends PlayerBase
 	 *
 	 * @param newBetValue the bet value of the player.
 	 */
-	public void setBet(int newBetValue) {
+	public void setBet(int newBetValue)
+	{
 		bet = newBetValue;
 	}
 }

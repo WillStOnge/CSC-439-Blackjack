@@ -4,8 +4,9 @@ import org.junit.Test;
 
 public class BlackjackTest
 {
-    @Test
-    public void mainTest(){
-        Blackjack.main(null);
-    }
+	@Test
+	public void mainTest()
+	{
+		Blackjack.main(null);
+	}
 }

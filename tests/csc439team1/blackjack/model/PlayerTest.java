@@ -9,7 +9,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class PlayerTest
 {
 	@Test
-	public void initTest(){
+	public void initTest()
+	{
 		Player player = new Player();
 		Assert.assertNotNull(player);
 	}
@@ -31,14 +32,16 @@ public class PlayerTest
 	}
 
 	@Test
-	public void addChipsTest(){
+	public void addChipsTest()
+	{
 		Player player = new Player();
 		player.addChips(1);
 		Assert.assertEquals(1, player.getNumChips());
 	}
 
 	@Test
-	public void loseChipsTest(){
+	public void loseChipsTest()
+	{
 		Player player = new Player();
 		player.loseChips(1);
 		Assert.assertEquals(-1, player.getNumChips());

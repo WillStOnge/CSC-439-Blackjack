@@ -6,7 +6,8 @@ import org.junit.Test;
 public class DealerTest
 {
 	@Test
-	public void initTest(){
+	public void initTest()
+	{
 		Dealer dealer = new Dealer();
 		Assert.assertNotNull(dealer);
 	}
