@@ -80,5 +80,16 @@ public class Card
 	{
 		this.hidden = hidden;
 	}
+
+	/**
+	 * Overridden toString method.
+	 *
+	 * @return string representation of the card (eg. KING of SPADES).
+	 */
+	@Override
+	public String toString()
+	{
+		return suit + " of " + number;
+	}
 }
 

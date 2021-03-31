@@ -76,6 +76,12 @@ public class StandardControllerTest
 	}
 
 	@Test
+	public void actionToString()
+	{
+		assertThat(Action.STAND.toString(), is("stand"));
+	}
+
+	@Test
 	public void buyChips()
 	{
 		StandardController controller = new StandardController(new TestView());

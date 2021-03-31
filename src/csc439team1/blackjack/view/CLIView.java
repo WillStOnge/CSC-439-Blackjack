@@ -48,8 +48,7 @@ public class CLIView extends ViewBase
             System.out.print("[ ");
             for (Card card : player.getHand().getCards())
             {
-                String cardString = card.getNumber().toString() + " of " + card.getSuit().toString();
-                System.out.printf("%s ", cardString);
+                System.out.printf("%s ", card.toString());
             }
         }
         else
@@ -60,8 +59,7 @@ public class CLIView extends ViewBase
             {
                 if (!card.isHidden())
                 {
-                    String cardString = card.getNumber().toString() + " of " + card.getSuit().toString();
-                    System.out.printf("%s ", cardString);
+                    System.out.printf("%s ", card.toString());
                 }
                 else
                 {
