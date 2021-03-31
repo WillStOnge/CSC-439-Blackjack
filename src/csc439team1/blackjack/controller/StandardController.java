@@ -3,8 +3,6 @@ package csc439team1.blackjack.controller;
 import csc439team1.blackjack.model.*;
 import csc439team1.blackjack.view.ViewBase;
 
-import java.io.IOException;
-
 /**
  * The standard blackjack controller. This is the brains of the program and contains all of the core game logic.
  *

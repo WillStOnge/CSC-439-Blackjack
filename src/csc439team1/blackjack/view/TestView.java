@@ -3,8 +3,6 @@ package csc439team1.blackjack.view;
 import csc439team1.blackjack.model.Action;
 import csc439team1.blackjack.model.PlayerBase;
 
-import java.io.IOException;
-
 public class TestView extends ViewBase
 {
 	private int bet = 100, chips = 1000;
@@ -89,7 +87,7 @@ public class TestView extends ViewBase
 	 * @return the number of chips purchased by the player
 	 */
 	@Override
-	public int promptBuyChips() throws IOException
+	public int promptBuyChips()
 	{
 		return chips;
 	}
@@ -100,7 +98,7 @@ public class TestView extends ViewBase
 	 * @return the amount the player will bet
 	 */
 	@Override
-	public int promptPlayerBet() throws IOException
+	public int promptPlayerBet()
 	{
 		return bet;
 	}
@@ -113,7 +111,7 @@ public class TestView extends ViewBase
 	 * @return the selected action
 	 */
 	@Override
-	public Action promptAction(Action... actions) throws IOException
+	public Action promptAction(Action... actions)
 	{
 		return action;
 	}
@@ -125,7 +123,7 @@ public class TestView extends ViewBase
 	 * @return the selected action of the user determining if they will continue playing or not
 	 */
 	@Override
-	public boolean promptKeepPlaying() throws IOException
+	public boolean promptKeepPlaying()
 	{
 		return true;
 	}

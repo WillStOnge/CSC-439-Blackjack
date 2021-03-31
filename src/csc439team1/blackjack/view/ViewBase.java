@@ -1,9 +1,7 @@
 package csc439team1.blackjack.view;
 
-import csc439team1.blackjack.model.PlayerBase;
 import csc439team1.blackjack.model.Action;
-
-import java.io.IOException;
+import csc439team1.blackjack.model.PlayerBase;
 
 /**
  * The View class is an abstract class that contains methods that will be used
@@ -82,14 +80,14 @@ public abstract class ViewBase
      *
      * @return the number of chips purchased by the player
      */
-    public abstract int promptBuyChips() throws IOException;
+    public abstract int promptBuyChips();
 
     /**
      * A display prompt that asks the player for the amount they are willing to bet.
      *
      * @return the amount the player will bet
      */
-    public abstract int promptPlayerBet() throws IOException;
+    public abstract int promptPlayerBet();
 
     /**
      * A display prompt that gives the player a list of actions that they will choose from to
@@ -98,7 +96,7 @@ public abstract class ViewBase
      * @param actions contains the hit and stand actions
      * @return the selected action
      */
-    public abstract Action promptAction(Action... actions) throws IOException;
+    public abstract Action promptAction(Action... actions);
 
     /**
      * A display prompt that gives the player a choice to either continue playing or to
@@ -106,5 +104,5 @@ public abstract class ViewBase
      *
      * @return the selected action of the user determining if they will continue playing or not
      */
-    public abstract boolean promptKeepPlaying() throws IOException;
+    public abstract boolean promptKeepPlaying();
 }
