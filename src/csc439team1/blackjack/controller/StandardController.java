@@ -54,7 +54,7 @@ public class StandardController extends ControllerBase
 			view.displayHand(dealer, dealer.score());
 
 			// Keep prompting the player until they stand, bust, or reach a score of 21.
-			while (getNextAction(Action.HIT, Action.STAND) != Action.STAND && player.score() < 21)
+			while (view.promptAction(Action.HIT, Action.STAND) != Action.STAND && player.score() < 21)
 			{
 				dealCard(player);
 				view.displayHit();
@@ -78,7 +78,7 @@ public class StandardController extends ControllerBase
 			dealer.clearHand();
 
 			// Check if player wishes to continue playing.
-			keepPlaying = keepPlaying();
+			keepPlaying = view.promptKeepPlaying();
 		}
 	}
 
@@ -127,17 +127,7 @@ public class StandardController extends ControllerBase
 	 */
 	public void placeBet()
 	{
-		int bet = 0;
-
-		try
-		{
-			bet = view.promptPlayerBet();
-		}
-		catch (IOException e)
-		{
-			// If there is an issue with the Scanner, just exit.
-			System.exit(1);
-		}
+		int bet = view.promptPlayerBet();
 
 		if (bet > player.getChips())
 			throw new IllegalArgumentException("Bet must be less than equal to the number of chips held.");
@@ -153,17 +143,7 @@ public class StandardController extends ControllerBase
 	 */
 	public void buyChips()
 	{
-		int chips = 0;
-
-		try
-		{
-			chips = view.promptBuyChips();
-		}
-		catch (IOException e)
-		{
-			// If there is an issue with the Scanner, just exit.
-			System.exit(1);
-		}
+		int chips = view.promptBuyChips();
 
 		if (chips < 10)
 			throw new IllegalArgumentException("You must buy at least 10 chips");
@@ -192,50 +172,5 @@ public class StandardController extends ControllerBase
 		Card card = shoe.pick();
 		card.setHidden(hidden);
 		player.addCard(card);
-	}
-
-	/**
-	 * Prompts the player to see if they want to continue playing after the end of a round.
-	 *
-	 * @return whether the player wants to continue playing or not.
-	 */
-	public boolean keepPlaying()
-	{
-		boolean keepPlaying = false;
-
-		try
-		{
-			keepPlaying = view.promptKeepPlaying();
-		}
-		catch (IOException e)
-		{
-			// If there is an issue with the Scanner, just exit.
-			System.exit(1);
-		}
-
-		return keepPlaying;
-	}
-
-	/**
-	 * Gets the next action wanted by the player.
-	 *
-	 * @param allowedActions the actions allowed to be performed with the current game's state.
-	 * @return the action picked by the player.
-	 */
-	public Action getNextAction(Action... allowedActions)
-	{
-		Action action = null;
-
-		try
-		{
-			action = view.promptAction(allowedActions);
-		}
-		catch (IOException e)
-		{
-			// If there is an issue with the Scanner, just exit.
-			System.exit(1);
-		}
-
-		return action;
 	}
 }

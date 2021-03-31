@@ -101,18 +101,4 @@ public class StandardControllerTest
 
 		assertThat(player.getHand().size(), is(1));
 	}
-
-	@Test
-	public void keepPlaying()
-	{
-		StandardController controller = new StandardController(new TestView());
-		assertThat(controller.keepPlaying(), is(true));
-	}
-
-	@Test
-	public void getNextAction()
-	{
-		StandardController controller = new StandardController(new TestView());
-		assertThat(controller.getNextAction(Action.HIT, Action.STAND), is(Action.HIT));
-	}
 }
