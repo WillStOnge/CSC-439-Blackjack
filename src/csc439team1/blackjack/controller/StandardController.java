@@ -3,6 +3,8 @@ package csc439team1.blackjack.controller;
 import csc439team1.blackjack.model.*;
 import csc439team1.blackjack.view.ViewBase;
 
+import java.io.IOException;
+
 /**
  * The standard blackjack controller. This is the brains of the program and contains all of the core game logic.
  *
@@ -33,15 +35,13 @@ public class StandardController extends ControllerBase
 	@Override
 	public void playBlackjack()
 	{
-		// TODO Start game output.
 		boolean keepPlaying = true;
 
+		view.displayStartGame();
 		buyChips();
 
 		while (keepPlaying)
 		{
-			Action action;
-
 			placeBet();
 
 			// Deal initial cards to dealer and player
@@ -50,55 +50,75 @@ public class StandardController extends ControllerBase
 			dealCard(dealer, true);
 			dealCard(dealer);
 
-			// TODO Determine what actions are allowed (Double?).
+			view.displayHand(player, player.score());
+			view.displayHand(dealer, dealer.score());
 
 			// Keep prompting the player until they stand, bust, or reach a score of 21.
-			while ((action = getNextAction(Action.HIT, Action.STAND)) != Action.STAND && player.score() < 21)
+			while (getNextAction(Action.HIT, Action.STAND) != Action.STAND && player.score() < 21)
 			{
 				dealCard(player);
-				// TODO Display hit message.
-				showHand(player);
+				view.displayHit();
+				view.displayHand(player, player.score());
 			}
 
 			// Deal cards to the dealer until their score is >= 17.
 			while (dealer.score() < 17)
 				dealCard(dealer);
 
-			// Check for any busts.
-			if (player.score() > 21)
-			{
-				// TODO dealer wins, player bust.
-			}
-			else if (dealer.score() > 21)
-			{
-				// TODO player wins, dealer bust.
-			}
-			else
-			{
-				// If nobody busted, check for the winner or a push.
-				if (dealer.score() > player.score())
-				{
-					// TODO dealer wins.
-				}
-				else if (dealer.score() < player.score())
-				{
-					// TODO player wins.
-				}
-				else
-				{
-					// TODO tie, nothing happens.
-				}
-			}
+			winnerCheck();
 
 			// Check if the player has run out of chips.
-			if (player.getNumChips() <= 0 || shoe.size() == 0)
+			if (player.getChips() <= 0 || shoe.size() == 0)
 			{
-				// TODO Print game over.
+				view.displayGameOver();
 				break;
 			}
 
+			player.clearHand();
+			dealer.clearHand();
+
 			// Check if player wishes to continue playing.
 			keepPlaying = keepPlaying();
+		}
+	}
+
+	/**
+	 * Displays the winner and if anyone busted.
+	 */
+	public void winnerCheck()
+	{
+		// Check for any busts.
+		if (player.score() > 21)
+		{
+			view.displayWinner(dealer);
+			view.displayBust(player);
+			player.setBet(0);
+		}
+		else if (dealer.score() > 21)
+		{
+			view.displayWinner(player);
+			view.displayBust(dealer);
+		}
+		else
+		{
+			// If nobody busted, check for the winner or a push.
+			if (dealer.score() > player.score())
+			{
+				view.displayWinner(dealer);
+				player.setBet(0);
+			}
+			else if (dealer.score() < player.score())
+			{
+				view.displayWinner(player);
+				player.addChips(player.getBet() * 2);
+				player.setBet(0);
+			}
+			else
+			{
+				view.displayTie(player.score());
+				player.addChips(player.getBet());
+				player.setBet(0);
+			}
 		}
 	}
 
@@ -107,16 +127,25 @@ public class StandardController extends ControllerBase
 	 */
 	public void placeBet()
 	{
-		// TODO Prompt player for bet.
 		int bet = 0;
 
-		if (bet > player.getNumChips())
+		try
+		{
+			bet = view.promptPlayerBet();
+		}
+		catch (IOException e)
+		{
+			// If there is an issue with the Scanner, just exit.
+			System.exit(1);
+		}
+
+		if (bet > player.getChips())
 			throw new IllegalArgumentException("Bet must be less than equal to the number of chips held.");
 		if (bet < 10 || bet > 500)
 			throw new IllegalArgumentException("Bet must be between 10 and 500.");
 
 		player.setBet(bet);
-		player.loseChips(bet);
+		player.removeChips(bet);
 	}
 
 	/**
@@ -124,9 +153,22 @@ public class StandardController extends ControllerBase
 	 */
 	public void buyChips()
 	{
-		// TODO Prompt player for the number of chips.
 		int chips = 0;
-		player.addChips(chips);
+
+		try
+		{
+			chips = view.promptBuyChips();
+		}
+		catch (IOException e)
+		{
+			// If there is an issue with the Scanner, just exit.
+			System.exit(1);
+		}
+
+		if (chips < 10)
+			throw new IllegalArgumentException("You must buy at least 10 chips");
+
+		player.setChips(chips);
 	}
 
 	/**
@@ -159,20 +201,19 @@ public class StandardController extends ControllerBase
 	 */
 	public boolean keepPlaying()
 	{
-		// TODO Check if player still wants to play.
-		return false;
-	}
+		boolean keepPlaying = false;
 
-	/**
-	 * Displays the hand and score of a player or the dealer.
-	 *
-	 * @param player the player whose hand should be displayed.
-	 */
-	public void showHand(PlayerBase player)
-	{
-		int score = player.score();
-		Hand hand = player.getHand();
-		// TODO Print the deck and its score.
+		try
+		{
+			keepPlaying = view.promptKeepPlaying();
+		}
+		catch (IOException e)
+		{
+			// If there is an issue with the Scanner, just exit.
+			System.exit(1);
+		}
+
+		return keepPlaying;
 	}
 
 	/**
@@ -183,7 +224,18 @@ public class StandardController extends ControllerBase
 	 */
 	public Action getNextAction(Action... allowedActions)
 	{
-		// TODO Prompt the player with the allowed actions and return the one picked.
-		return Action.HIT;
+		Action action = null;
+
+		try
+		{
+			action = view.promptAction(allowedActions);
+		}
+		catch (IOException e)
+		{
+			// If there is an issue with the Scanner, just exit.
+			System.exit(1);
+		}
+
+		return action;
 	}
 }

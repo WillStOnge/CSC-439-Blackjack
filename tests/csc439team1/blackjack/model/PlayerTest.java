@@ -27,8 +27,8 @@ public class PlayerTest
 	public void setNumChipsTest()
 	{
 		Player player = new Player();
-		player.setNumChips(10);
-		Assert.assertEquals(10, player.getNumChips());
+		player.setChips(10);
+		Assert.assertEquals(10, player.getChips());
 	}
 
 	@Test
@@ -36,15 +36,15 @@ public class PlayerTest
 	{
 		Player player = new Player();
 		player.addChips(1);
-		Assert.assertEquals(1, player.getNumChips());
+		Assert.assertEquals(1, player.getChips());
 	}
 
 	@Test
 	public void loseChipsTest()
 	{
 		Player player = new Player();
-		player.loseChips(1);
-		Assert.assertEquals(-1, player.getNumChips());
+		player.removeChips(1);
+		Assert.assertEquals(-1, player.getChips());
 	}
 
 	@Test

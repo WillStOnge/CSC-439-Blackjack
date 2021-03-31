@@ -8,7 +8,7 @@ package csc439team1.blackjack.model;
  */
 public class Player extends PlayerBase
 {
-	private int numChips;
+	private int chips;
 	private int bet;
 
 	/**
@@ -17,7 +17,7 @@ public class Player extends PlayerBase
 	public Player()
 	{
 		super();
-		numChips = 0;
+		chips = 0;
 		bet = 0;
 	}
 
@@ -26,39 +26,39 @@ public class Player extends PlayerBase
 	 *
 	 * @return the player's number of chips.
 	 */
-	public int getNumChips()
+	public int getChips()
 	{
-		return numChips;
+		return chips;
 	}
 
 	/**
 	 * Sets the players chip count.
 	 *
-	 * @param numChips is assigned to the number of chips a player has.
+	 * @param chips is assigned to the number of chips a player has.
 	 */
-	public void setNumChips(int numChips)
+	public void setChips(int chips)
 	{
-		this.numChips = numChips;
+		this.chips = chips;
 	}
 
 	/**
 	 * Add to the player's number of chips.
 	 *
-	 * @param addedChips Number of chips to add.
+	 * @param chips Number of chips to add.
 	 */
-	public void addChips(int addedChips)
+	public void addChips(int chips)
 	{
-		numChips += addedChips;
+		this.chips += chips;
 	}
 
 	/**
 	 * Take away player's chips
 	 *
-	 * @param lostChips Number of chips to take away.
+	 * @param chips Number of chips to take away.
 	 */
-	public void loseChips(int lostChips)
+	public void removeChips(int chips)
 	{
-		numChips -= lostChips;
+		this.chips -= chips;
 	}
 
 	/**
@@ -74,10 +74,10 @@ public class Player extends PlayerBase
 	/**
 	 * Sets the players bet.
 	 *
-	 * @param newBetValue the bet value of the player.
+	 * @param bet the bet value of the player.
 	 */
-	public void setBet(int newBetValue)
+	public void setBet(int bet)
 	{
-		bet = newBetValue;
+		this.bet = bet;
 	}
 }

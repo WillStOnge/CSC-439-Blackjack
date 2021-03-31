@@ -48,4 +48,12 @@ public abstract class PlayerBase
 	{
 		return hand;
 	}
+
+	/**
+	 * Clears the hand of the player.
+	 */
+	public void clearHand()
+	{
+		hand.getCards().clear();
+	}
 }

@@ -64,6 +64,10 @@ public class Hand
 		// Computes the score of the deck (ace is always 11).
 		for (Card card : cards)
 		{
+			// Don't count a hidden card.
+			if (card.isHidden())
+				continue;
+
 			number = card.getNumber();
 			score += number.getValue();
 
