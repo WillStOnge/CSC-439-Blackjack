@@ -78,11 +78,6 @@ public abstract class ViewBase
     public abstract void displayStand();
 
     /**
-     * A display output message that indicates a double has occurred in the game.
-     */
-    public abstract void displayDouble();
-
-    /**
      * A display prompt that asks the player for the amount of chips they wish to buy.
      *
      * @return the number of chips purchased by the player
@@ -98,9 +93,9 @@ public abstract class ViewBase
 
     /**
      * A display prompt that gives the player a list of actions that they will choose from to
-     * proceed with the game. Actions include HIT, STAND, and DOUBLE.
+     * proceed with the game. Actions include HIT and STAND.
      *
-     * @param actions contains the hit, stand, and double actions
+     * @param actions contains the hit and stand actions
      * @return the selected action
      */
     public abstract Action promptAction(Action... actions) throws IOException;

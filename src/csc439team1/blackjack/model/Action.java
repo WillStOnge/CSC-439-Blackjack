@@ -9,8 +9,7 @@ package csc439team1.blackjack.model;
 public enum Action
 {
 	HIT("hit"),
-	STAND("stand"),
-	DOUBLE("double");
+	STAND("stand");
 
 	private final String name;
 

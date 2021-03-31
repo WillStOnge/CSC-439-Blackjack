@@ -175,15 +175,6 @@ public class CLIView extends ViewBase
     }
 
     /**
-     * A display output message that indicates a double has occurred in the game.
-     */
-    @Override
-    public void displayDouble()
-    {
-        System.out.println("You double!");
-    }
-
-    /**
      * A display prompt that asks the player for the amount of chips they wish to buy.
      *
      * @return the number of chips purchased by the player
@@ -212,9 +203,9 @@ public class CLIView extends ViewBase
 
     /**
      * A display prompt that gives the player a list of actions that they will choose from to
-     * proceed with the game. Actions include HIT, STAND, and DOUBLE.
+     * proceed with the game. Actions include HIT and STAND.
      *
-     * @param actions contains the hit, stand, and double actions
+     * @param actions contains the hit and stand actions
      * @return the selected action
      */
     @Override
@@ -234,10 +225,6 @@ public class CLIView extends ViewBase
             else if (line.equalsIgnoreCase("STAND"))
             {
                 returnedAction = Action.STAND;
-            }
-            else if (line.equalsIgnoreCase("DOUBLE"))
-            {
-                returnedAction = Action.DOUBLE;
             }
             else
             {

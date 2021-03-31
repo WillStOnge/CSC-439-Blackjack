@@ -2,7 +2,7 @@ package csc439team1.blackjack.controller;
 
 import csc439team1.blackjack.model.Action;
 import csc439team1.blackjack.model.Player;
-import csc439team1.blackjack.view.CLIView;
+import csc439team1.blackjack.view.TestView;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -18,38 +18,58 @@ public class StandardControllerTest
 	@Test
 	public void winnerCheck()
 	{
-		StandardController controller = new StandardController(new CLIView());
+		StandardController controller = new StandardController(new TestView());
 		controller.winnerCheck();
 	}
 
 	@Test
 	public void placeBet()
 	{
-		StandardController controller = new StandardController(new CLIView());
+		StandardController controller = new StandardController(new TestView());
+		controller.placeBet();
+	}
 
-		String input = "100";
-		InputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
+	@Test(expected = IllegalArgumentException.class)
+	public void placeBetNegative()
+	{
+		TestView view = new TestView();
+		StandardController controller = new StandardController(view);
 
+		view.setBet(1001);
+		controller.placeBet();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void placeBetNegative1()
+	{
+		TestView view = new TestView();
+		StandardController controller = new StandardController(view);
+
+		view.setBet(1);
+		controller.placeBet();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void placeBetNegative2()
+	{
+		TestView view = new TestView();
+		StandardController controller = new StandardController(view);
+
+		view.setBet(501);
 		controller.placeBet();
 	}
 
 	@Test
 	public void buyChips()
 	{
-		StandardController controller = new StandardController(new CLIView());
-
-		String input = "100";
-		InputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
-
+		StandardController controller = new StandardController(new TestView());
 		controller.buyChips();
 	}
 
 	@Test
 	public void dealCard()
 	{
-		StandardController controller = new StandardController(new CLIView());
+		StandardController controller = new StandardController(new TestView());
 		Player player = new Player();
 		controller.dealCard(player);
 
@@ -59,24 +79,14 @@ public class StandardControllerTest
 	@Test
 	public void keepPlaying()
 	{
-		StandardController controller = new StandardController(new CLIView());
-
-		String input = "N";
-		InputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
-
-		assertThat(controller.keepPlaying(), is(false));
+		StandardController controller = new StandardController(new TestView());
+		assertThat(controller.keepPlaying(), is(true));
 	}
 
 	@Test
 	public void getNextAction()
 	{
-		StandardController controller = new StandardController(new CLIView());
-
-		String input = "HIT";
-		InputStream in = new ByteArrayInputStream(input.getBytes());
-		System.setIn(in);
-
-		controller.getNextAction(Action.HIT, Action.DOUBLE, Action.STAND);
+		StandardController controller = new StandardController(new TestView());
+		assertThat(controller.getNextAction(Action.HIT, Action.STAND), is(Action.STAND));
 	}
 }
