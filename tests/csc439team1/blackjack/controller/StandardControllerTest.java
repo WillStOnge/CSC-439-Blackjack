@@ -5,9 +5,6 @@ import csc439team1.blackjack.model.Player;
 import csc439team1.blackjack.view.TestView;
 import org.junit.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
