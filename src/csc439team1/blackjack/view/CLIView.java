@@ -252,6 +252,7 @@ public class CLIView extends ViewBase
     @Override
     public boolean promptKeepPlaying()
     {
+        System.out.print("Would you like to keep playing? [Y/N]: ");
         String line = lineScanner();
         while (true)
         {
@@ -305,7 +306,7 @@ public class CLIView extends ViewBase
             }
             catch (NumberFormatException ex)
             {
-                System.out.println("Integer input not valid, try again: ");
+                System.out.print("Integer input not valid, try again: ");
 
                 str = lineScanner();
             }
