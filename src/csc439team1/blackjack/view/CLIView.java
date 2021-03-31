@@ -55,7 +55,7 @@ public class CLIView extends ViewBase
         }
         else
         {
-            System.out.print("The Dealer's hand : ");
+            System.out.print("\nThe Dealer's hand : ");
             System.out.print("[ ");
             for (Card card : player.getHand().getCards())
             {
@@ -70,7 +70,7 @@ public class CLIView extends ViewBase
                 }
             }
         }
-        System.out.print(" ]");
+        System.out.print("]");
     }
 
     /**
@@ -183,7 +183,7 @@ public class CLIView extends ViewBase
     public int promptBuyChips() throws IOException
     {
         System.out.print("How many chips would you like to buy?: ");
-        String line = input.nextLine();
+        String line = lineScanner();
         return validateInteger(line);
     }
 
@@ -197,7 +197,7 @@ public class CLIView extends ViewBase
     {
         System.out.println("How many chips would you like to bet?");
         System.out.print("(Note that this game only allows bets from 10-500 chips): ");
-        String line = input.nextLine();
+        String line = lineScanner();
         return validateInteger(line);
     }
 
@@ -213,8 +213,8 @@ public class CLIView extends ViewBase
     {
         boolean acceptInput = false;
         Action returnedAction = null;
-        System.out.print("Type one of the following to make a choice: " + Arrays.toString(actions));
-        String line = input.nextLine();
+        System.out.print("\nType one of the following to make a choice: " + Arrays.toString(actions) + " ");
+        String line = lineScanner();
 
         while (!acceptInput)
         {
@@ -229,14 +229,14 @@ public class CLIView extends ViewBase
             else
             {
                 System.out.print("Input not valid, try again: ");
-                line = input.nextLine();
+                line = lineScanner();
             }
 
 
             if (!Arrays.asList(actions).contains(returnedAction))
             {
                 System.out.println("That is not allowed, try again: " + Arrays.toString(actions));
-                line = input.nextLine();
+                line = lineScanner();
             }
             else
             {
@@ -255,8 +255,7 @@ public class CLIView extends ViewBase
     @Override
     public boolean promptKeepPlaying() throws IOException
     {
-        System.out.print("Would you like to keep playing? [Y/N]: ");
-        String line = input.nextLine();
+        String line = lineScanner();
         while (true)
         {
             if (line.equalsIgnoreCase("Y"))
@@ -270,9 +269,26 @@ public class CLIView extends ViewBase
             else
             {
                 System.out.print("Input not valid, try again: ");
-                line = input.nextLine();
+                line = lineScanner();
             }
         }
+    }
+
+    /**
+     * A helper method that assists prompt methods with scanning input. Checks for quit.
+     *
+     * @return the input from the line
+     */
+    public String lineScanner() throws IOException
+    {
+        String line = input.nextLine();
+
+        if (line.toLowerCase().contains("quit")) {
+            displayQuit();
+            System.exit(0);
+        }
+
+        return line;
     }
 
     /**
@@ -293,11 +309,11 @@ public class CLIView extends ViewBase
             }
             catch (NumberFormatException ex)
             {
-                System.out.println("Input not valid, try again: ");
+                System.out.println("Integer input not valid, try again: ");
 
                 //TODO should I add a check for 'quit'?
 
-                str = input.nextLine();
+                str = lineScanner();
             }
         }
     }
