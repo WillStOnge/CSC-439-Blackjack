@@ -5,7 +5,6 @@ import csc439team1.blackjack.model.Card;
 import csc439team1.blackjack.model.Player;
 import csc439team1.blackjack.model.PlayerBase;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -180,7 +179,7 @@ public class CLIView extends ViewBase
      * @return the number of chips purchased by the player
      */
     @Override
-    public int promptBuyChips() throws IOException
+    public int promptBuyChips()
     {
         System.out.print("How many chips would you like to buy?: ");
         String line = lineScanner();
@@ -193,7 +192,7 @@ public class CLIView extends ViewBase
      * @return the amount the player will bet
      */
     @Override
-    public int promptPlayerBet() throws IOException
+    public int promptPlayerBet()
     {
         System.out.println("How many chips would you like to bet?");
         System.out.print("(Note that this game only allows bets from 10-500 chips): ");
@@ -209,7 +208,7 @@ public class CLIView extends ViewBase
      * @return the selected action
      */
     @Override
-    public Action promptAction(Action... actions) throws IOException
+    public Action promptAction(Action... actions)
     {
         boolean acceptInput = false;
         Action returnedAction = null;
@@ -253,7 +252,7 @@ public class CLIView extends ViewBase
      * @return the selected action of the user determining if they will continue playing or not
      */
     @Override
-    public boolean promptKeepPlaying() throws IOException
+    public boolean promptKeepPlaying()
     {
         String line = lineScanner();
         while (true)
@@ -279,7 +278,7 @@ public class CLIView extends ViewBase
      *
      * @return the input from the line
      */
-    public String lineScanner() throws IOException
+    public String lineScanner()
     {
         String line = input.nextLine();
 
@@ -297,8 +296,7 @@ public class CLIView extends ViewBase
      * @param str the input to be validated
      * @return the validated input
      */
-    public int validateInteger(String str) throws IOException
-    {
+    public int validateInteger(String str) {
         int s;
         while (true)
         {
@@ -310,8 +308,6 @@ public class CLIView extends ViewBase
             catch (NumberFormatException ex)
             {
                 System.out.println("Integer input not valid, try again: ");
-
-                //TODO should I add a check for 'quit'?
 
                 str = lineScanner();
             }
