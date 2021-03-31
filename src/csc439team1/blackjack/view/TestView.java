@@ -7,7 +7,8 @@ import java.io.IOException;
 
 public class TestView extends ViewBase
 {
-	private int bet = 0;
+	private int bet = 100, chips = 1000;
+	private Action action = Action.HIT;
 
 	/**
 	 * A display message output that indicates a game of Blackjack has begun.
@@ -90,7 +91,7 @@ public class TestView extends ViewBase
 	@Override
 	public int promptBuyChips() throws IOException
 	{
-		return 1000;
+		return chips;
 	}
 
 	/**
@@ -114,7 +115,7 @@ public class TestView extends ViewBase
 	@Override
 	public Action promptAction(Action... actions) throws IOException
 	{
-		return Action.STAND;
+		return action;
 	}
 
 	/**
@@ -137,5 +138,25 @@ public class TestView extends ViewBase
 	public void setBet(int bet)
 	{
 		this.bet = bet;
+	}
+
+	/**
+	 * Set the chips field for testing.
+	 *
+	 * @param chips the new chips value.
+	 */
+	public void setChips(int chips)
+	{
+		this.chips = chips;
+	}
+
+	/**
+	 * Set the action field for testing.
+	 *
+	 * @param action the new action value.
+	 */
+	public void setAction(Action action)
+	{
+		this.action = action;
 	}
 }

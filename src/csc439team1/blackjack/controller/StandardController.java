@@ -139,8 +139,6 @@ public class StandardController extends ControllerBase
 			System.exit(1);
 		}
 
-		System.out.println(bet);
-
 		if (bet > player.getChips())
 			throw new IllegalArgumentException("Bet must be less than equal to the number of chips held.");
 		if (bet < 10 || bet > 500)

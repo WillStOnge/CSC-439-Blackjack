@@ -13,7 +13,22 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StandardControllerTest
 {
-	// TODO Fix user input.
+	@Test
+	public void playBlackjack()
+	{
+		StandardController controller = new StandardController(new TestView());
+		controller.playBlackjack();
+	}
+
+	@Test
+	public void playBlackjack1()
+	{
+		TestView view = new TestView();
+		StandardController controller = new StandardController(view);
+
+		view.setAction(Action.STAND);
+		controller.playBlackjack();
+	}
 
 	@Test
 	public void winnerCheck()
@@ -26,6 +41,7 @@ public class StandardControllerTest
 	public void placeBet()
 	{
 		StandardController controller = new StandardController(new TestView());
+		controller.buyChips();
 		controller.placeBet();
 	}
 
@@ -35,6 +51,7 @@ public class StandardControllerTest
 		TestView view = new TestView();
 		StandardController controller = new StandardController(view);
 
+		controller.buyChips();
 		view.setBet(1001);
 		controller.placeBet();
 	}
@@ -45,6 +62,7 @@ public class StandardControllerTest
 		TestView view = new TestView();
 		StandardController controller = new StandardController(view);
 
+		controller.buyChips();
 		view.setBet(1);
 		controller.placeBet();
 	}
@@ -55,6 +73,7 @@ public class StandardControllerTest
 		TestView view = new TestView();
 		StandardController controller = new StandardController(view);
 
+		controller.buyChips();
 		view.setBet(501);
 		controller.placeBet();
 	}
@@ -63,6 +82,16 @@ public class StandardControllerTest
 	public void buyChips()
 	{
 		StandardController controller = new StandardController(new TestView());
+		controller.buyChips();
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void buyChipsNegative()
+	{
+		TestView view = new TestView();
+		StandardController controller = new StandardController(view);
+
+		view.setChips(1);
 		controller.buyChips();
 	}
 
@@ -87,6 +116,6 @@ public class StandardControllerTest
 	public void getNextAction()
 	{
 		StandardController controller = new StandardController(new TestView());
-		assertThat(controller.getNextAction(Action.HIT, Action.STAND), is(Action.STAND));
+		assertThat(controller.getNextAction(Action.HIT, Action.STAND), is(Action.HIT));
 	}
 }
