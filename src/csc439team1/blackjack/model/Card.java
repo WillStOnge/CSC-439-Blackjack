@@ -89,7 +89,7 @@ public class Card
 	@Override
 	public String toString()
 	{
-		return number + " of " + suit;
+		return hidden ? "### of ###" : number + " of " + suit;
 	}
 }
 
