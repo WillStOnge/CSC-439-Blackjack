@@ -17,7 +17,15 @@ import java.util.Scanner;
  */
 public class CLIView extends ViewBase
 {
-    Scanner input = new Scanner(System.in);
+    Scanner input;
+
+    /**
+     * Sets up the console scanner for the view.
+     */
+    public CLIView()
+    {
+        input = new Scanner(System.in);
+    }
 
     /**
      * A display message output that indicates a game of Blackjack has begun.
@@ -44,30 +52,10 @@ public class CLIView extends ViewBase
         if (player instanceof Player)
         {
             System.out.println("Your current hand score: " + score);
-            System.out.print("Your current hand : ");
-            System.out.print("[ ");
-            for (Card card : player.getHand().getCards())
-            {
-                System.out.printf("%s ", card.toString());
-            }
+            System.out.println("Your current hand : " + Arrays.toString(player.getHand().getCards().toArray()));
         }
         else
-        {
-            System.out.print("\nThe Dealer's hand : ");
-            System.out.print("[ ");
-            for (Card card : player.getHand().getCards())
-            {
-                if (!card.isHidden())
-                {
-                    System.out.printf("%s ", card.toString());
-                }
-                else
-                {
-                    System.out.print("### of ### ");
-                }
-            }
-        }
-        System.out.print("]");
+            System.out.println("The dealer's hand : " + Arrays.toString(player.getHand().getCards().toArray()));
     }
 
     /**
@@ -97,13 +85,9 @@ public class CLIView extends ViewBase
     public void displayWinner(PlayerBase player)
     {
         if (player instanceof Player)
-        {
             System.out.println("You win! Score: " + player.score());
-        }
         else
-        {
             System.out.println("Dealer wins! Score: " + player.score());
-        }
     }
 
     /**
@@ -115,13 +99,9 @@ public class CLIView extends ViewBase
     public void displayBust(PlayerBase player)
     {
         if (player instanceof Player)
-        {
             System.out.println("You bust!");
-        }
         else
-        {
             System.out.println("Dealer bust! Score: " + player.score());
-        }
     }
 
     /**
@@ -133,13 +113,9 @@ public class CLIView extends ViewBase
     public void displayScore(PlayerBase player)
     {
         if (player instanceof Player)
-        {
             System.out.println("Your current score is: " + player.score());
-        }
         else
-        {
             System.out.println("The dealer's current score is: " + player.score());
-        }
     }
 
     /**
@@ -180,8 +156,8 @@ public class CLIView extends ViewBase
     public int promptBuyChips()
     {
         System.out.print("How many chips would you like to buy?: ");
-        String line = lineScanner();
-        return validateInteger(line);
+
+        return validateInteger(lineScanner());
     }
 
     /**
@@ -194,8 +170,8 @@ public class CLIView extends ViewBase
     {
         System.out.println("How many chips would you like to bet?");
         System.out.print("(Note that this game only allows bets from 10-500 chips): ");
-        String line = lineScanner();
-        return validateInteger(line);
+
+        return validateInteger(lineScanner());
     }
 
     /**
@@ -208,39 +184,27 @@ public class CLIView extends ViewBase
     @Override
     public Action promptAction(Action... actions)
     {
-        boolean acceptInput = false;
-        Action returnedAction = null;
-        System.out.print("\nType one of the following to make a choice: " + Arrays.toString(actions) + " ");
-        String line = lineScanner();
+        Action returnedAction;
+        String line;
+        System.out.print("Type one of the following to make a choice: " + Arrays.toString(actions) + " ");
 
-        while (!acceptInput)
+        while (true)
         {
-            if (line.equalsIgnoreCase("HIT"))
+            try
             {
-                returnedAction = Action.HIT;
-            }
-            else if (line.equalsIgnoreCase("STAND"))
-            {
-                returnedAction = Action.STAND;
-            }
-            else
-            {
-                System.out.print("Input not valid, try again: ");
                 line = lineScanner();
-            }
+                returnedAction = Action.valueOf(line.toUpperCase());
 
-
-            if (!Arrays.asList(actions).contains(returnedAction))
-            {
-                System.out.println("That is not allowed, try again: " + Arrays.toString(actions));
-                line = lineScanner();
+                if (!Arrays.asList(actions).contains(returnedAction))
+                    System.out.println("That is not allowed, try again: " + Arrays.toString(actions));
+                else
+                    return returnedAction;
             }
-            else
+            catch (IllegalArgumentException e)
             {
-                acceptInput = true;
+                System.out.print("Input not valid, try again: " + Arrays.toString(actions));
             }
         }
-        return returnedAction;
     }
 
     /**
@@ -253,22 +217,18 @@ public class CLIView extends ViewBase
     public boolean promptKeepPlaying()
     {
         System.out.print("Would you like to keep playing? [Y/N]: ");
-        String line = lineScanner();
+        String line;
+
         while (true)
         {
+            line = lineScanner();
+
             if (line.equalsIgnoreCase("Y"))
-            {
                 return true;
-            }
             else if (line.equalsIgnoreCase("N"))
-            {
                 return false;
-            }
             else
-            {
                 System.out.print("Input not valid, try again: ");
-                line = lineScanner();
-            }
         }
     }
 
@@ -281,7 +241,8 @@ public class CLIView extends ViewBase
     {
         String line = input.nextLine();
 
-        if (line.toLowerCase().contains("quit")) {
+        if (line.toLowerCase().contains("quit"))
+        {
             displayQuit();
             System.exit(0);
         }
@@ -295,14 +256,13 @@ public class CLIView extends ViewBase
      * @param str the input to be validated
      * @return the validated input
      */
-    public int validateInteger(String str) {
-        int s;
+    public int validateInteger(String str)
+    {
         while (true)
         {
             try
             {
-                s = Integer.parseInt(str);
-                return s;
+                return Integer.parseInt(str);
             }
             catch (NumberFormatException ex)
             {
