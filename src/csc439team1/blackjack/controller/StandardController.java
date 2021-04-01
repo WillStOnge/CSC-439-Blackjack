@@ -52,7 +52,7 @@ public class StandardController extends ControllerBase
 			view.displayHand(dealer, dealer.score());
 
 			// Keep prompting the player until they stand, bust, or reach a score of 21.
-			while (view.promptAction(Action.HIT, Action.STAND) != Action.STAND && player.score() < 21)
+			while (player.score() < 21 && view.promptAction(Action.HIT, Action.STAND) != Action.STAND)
 			{
 				dealCard(player);
 				view.displayHit();
@@ -77,6 +77,9 @@ public class StandardController extends ControllerBase
 
 			// Check if player wishes to continue playing.
 			keepPlaying = view.promptKeepPlaying();
+
+			if (!keepPlaying)
+				view.displayQuit();
 		}
 	}
 
@@ -96,6 +99,8 @@ public class StandardController extends ControllerBase
 		{
 			view.displayWinner(player);
 			view.displayBust(dealer);
+			player.addChips(player.getBet() * 2);
+			player.setBet(0);
 		}
 		else
 		{
