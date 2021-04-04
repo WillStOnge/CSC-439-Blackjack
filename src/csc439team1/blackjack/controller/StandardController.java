@@ -40,6 +40,8 @@ public class StandardController extends ControllerBase
 
 		while (keepPlaying)
 		{
+			Action action = null;
+
 			placeBet();
 
 			// Deal initial cards to dealer and player
@@ -52,12 +54,15 @@ public class StandardController extends ControllerBase
 			view.displayHand(dealer, dealer.score());
 
 			// Keep prompting the player until they stand, bust, or reach a score of 21.
-			while (player.score() < 21 && view.promptAction(Action.HIT, Action.STAND) != Action.STAND)
+			while (player.score() < 21 && (action = view.promptAction(Action.HIT, Action.STAND)) != Action.STAND)
 			{
 				dealCard(player);
 				view.displayHit();
 				view.displayHand(player, player.score());
 			}
+
+			if (action == Action.STAND)
+				view.displayStand();
 
 			// Deal cards to the dealer until their score is >= 17.
 			while (dealer.score() < 17)
@@ -91,14 +96,14 @@ public class StandardController extends ControllerBase
 		// Check for any busts.
 		if (player.score() > 21)
 		{
-			view.displayWinner(dealer);
 			view.displayBust(player);
+			view.displayWinner(dealer);
 			player.setBet(0);
 		}
 		else if (dealer.score() > 21)
 		{
-			view.displayWinner(player);
 			view.displayBust(dealer);
+			view.displayWinner(player);
 			player.addChips(player.getBet() * 2);
 			player.setBet(0);
 		}
@@ -112,6 +117,7 @@ public class StandardController extends ControllerBase
 			}
 			else if (dealer.score() < player.score())
 			{
+				view.displayScore(dealer);
 				view.displayWinner(player);
 				player.addChips(player.getBet() * 2);
 				player.setBet(0);
