@@ -59,16 +59,23 @@ public class StandardController extends ControllerBase
 			while (player.score() < 21 && (action = view.promptAction(Action.HIT, Action.STAND)) != Action.STAND)
 			{
 				dealCard(player);
-				view.displayHit();
+				view.displayHit(player);
 				view.displayHand(player, player.score());
 			}
 
 			if (action == Action.STAND)
-				view.displayStand();
+				view.displayStand(player);
 
 			// Deal cards to the dealer until their score is >= 17.
 			while (dealer.score() < 17)
+			{
 				dealCard(dealer);
+				view.displayHit(dealer);
+			}
+
+			// Display if dealer stood or not.
+			if (dealer.score() <= 21)
+				view.displayStand(dealer);
 
 			winnerCheck();
 
