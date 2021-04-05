@@ -7,6 +7,7 @@ public class TestView extends ViewBase
 {
 	private int bet = 100, chips = 1000;
 	private Action action = Action.HIT;
+	private boolean keepPlaying = false;
 
 	/**
 	 * A display message output that indicates a game of Blackjack has begun.
@@ -73,13 +74,13 @@ public class TestView extends ViewBase
 	 * A display output message that indicates a hit has occurred in the game.
 	 */
 	@Override
-	public void displayHit() { }
+	public void displayHit(PlayerBase player) { }
 
 	/**
 	 * A display output message that indicates a stand has occurred in the game.
 	 */
 	@Override
-	public void displayStand() { }
+	public void displayStand(PlayerBase player) { }
 
 	/**
 	 * A display prompt that asks the player for the amount of chips they wish to buy.
@@ -125,7 +126,13 @@ public class TestView extends ViewBase
 	@Override
 	public boolean promptKeepPlaying()
 	{
-		return true;
+		if (!keepPlaying)
+		{
+			keepPlaying = true;
+			return true;
+		}
+		else
+			return false;
 	}
 
 	/**

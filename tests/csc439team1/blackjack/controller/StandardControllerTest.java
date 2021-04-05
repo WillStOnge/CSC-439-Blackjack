@@ -35,6 +35,18 @@ public class StandardControllerTest
 	}
 
 	@Test
+	public void testZeroChips()
+	{
+		TestView view = new TestView();
+		StandardController controller = new StandardController(view);
+
+		view.setChips(10);
+		view.setBet(10);
+		view.setAction(Action.STAND);
+		controller.playBlackjack();
+	}
+
+	@Test
 	public void placeBet()
 	{
 		StandardController controller = new StandardController(new TestView());

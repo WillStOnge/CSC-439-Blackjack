@@ -80,7 +80,7 @@ public class StandardController extends ControllerBase
 			winnerCheck();
 
 			// Check if the player has run out of chips.
-			if (player.getChips() <= 0 || shoe.size() == 0)
+			if (player.getChips() <= 0)
 			{
 				view.displayGameOver();
 				break;
