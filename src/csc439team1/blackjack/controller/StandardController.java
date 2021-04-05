@@ -11,6 +11,7 @@ import csc439team1.blackjack.view.ViewBase;
  */
 public class StandardController extends ControllerBase
 {
+	private final int BET_RETURNED;
 	private final Player player;
 	private final Shoe shoe;
 
@@ -24,6 +25,7 @@ public class StandardController extends ControllerBase
 		super(view);
 		player = new Player();
 		shoe = new Shoe(3);
+		BET_RETURNED = 2;
 	}
 
 	/**
@@ -104,7 +106,7 @@ public class StandardController extends ControllerBase
 		{
 			view.displayBust(dealer);
 			view.displayWinner(player);
-			player.addChips(player.getBet() * 2);
+			player.addChips(player.getBet() * BET_RETURNED);
 			player.setBet(0);
 		}
 		else
@@ -119,7 +121,7 @@ public class StandardController extends ControllerBase
 			{
 				view.displayScore(dealer);
 				view.displayWinner(player);
-				player.addChips(player.getBet() * 2);
+				player.addChips(player.getBet() * BET_RETURNED);
 				player.setBet(0);
 			}
 			else
