@@ -67,13 +67,17 @@ public abstract class ViewBase
 
     /**
      * A display output message that indicates a hit has occurred in the game.
+     *
+     * @param player abstract player used to determine which player's hit to output
      */
-    public abstract void displayHit();
+    public abstract void displayHit(PlayerBase player);
 
     /**
      * A display output message that indicates a stand has occurred in the game.
+     *
+     * @param player abstract player used to determine which player's stand to output
      */
-    public abstract void displayStand();
+    public abstract void displayStand(PlayerBase player);
 
     /**
      * A display prompt that asks the player for the amount of chips they wish to buy.
