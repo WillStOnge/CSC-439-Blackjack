@@ -1,7 +1,6 @@
 package csc439team1.blackjack.view;
 
 import csc439team1.blackjack.model.Action;
-import csc439team1.blackjack.model.Card;
 import csc439team1.blackjack.model.Player;
 import csc439team1.blackjack.model.PlayerBase;
 
@@ -131,20 +130,31 @@ public class CLIView extends ViewBase
 
     /**
      * A display output message that indicates a hit has occurred in the game.
+     *
+     * @param player abstract player used to determine which player's hit to output
      */
     @Override
-    public void displayHit()
+    public void displayHit(PlayerBase player)
     {
-        System.out.println("You hit!");
+        if (player instanceof Player)
+            System.out.println("You hit!");
+        else
+            System.out.println("Dealer hit!");
+
     }
 
     /**
      * A display output message that indicates a stand has occurred in the game.
+     *
+     * @param player abstract player used to determine which player's stand to output
      */
     @Override
-    public void displayStand()
+    public void displayStand(PlayerBase player)
     {
-        System.out.println("You stand!");
+        if (player instanceof Player)
+            System.out.println("You stand!");
+        else
+            System.out.println("Dealer stand!");
     }
 
     /**
@@ -241,7 +251,7 @@ public class CLIView extends ViewBase
     {
         String line = input.nextLine();
 
-        if (line.toLowerCase().contains("quit"))
+        if (line.toLowerCase().equals("quit"))
         {
             displayQuit();
             System.exit(0);
