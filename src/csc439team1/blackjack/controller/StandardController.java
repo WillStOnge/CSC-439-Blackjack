@@ -43,6 +43,7 @@ public class StandardController extends ControllerBase
 		while (keepPlaying)
 		{
 			Action action = null;
+			boolean doubled = false;
 
 			placeBet();
 
@@ -55,27 +56,41 @@ public class StandardController extends ControllerBase
 			view.displayHand(player, player.score());
 			view.displayHand(dealer, dealer.score());
 
-			// Keep prompting the player until they stand, bust, or reach a score of 21.
-			while (player.score() < 21 && (action = view.promptAction(Action.HIT, Action.STAND)) != Action.STAND)
+			// Check if player wants to double. They can only double if their score is between 9 and 11 after the first 2 cards are dealt.
+			if (player.score() >= 9 && player.score() <= 11 && (action = view.promptAction(Action.HIT, Action.STAND, Action.DOUBLE)) != Action.STAND)
 			{
-				dealCard(player);
-				view.displayHit(player);
-				view.displayHand(player, player.score());
+				hit(player);
+
+				if (action == Action.DOUBLE)
+				{
+					player.removeChips(player.getBet());
+					player.setBet(player.getBet());
+					doubled = true;
+
+					// Force player to stand if they don't bust.
+					if (player.score() <= 21)
+						action = Action.STAND;
+				}
 			}
+
+			// Keep prompting the player until they stand, bust, or reach a score of 21.
+			while (!doubled && player.score() < 21 && (action = view.promptAction(Action.HIT, Action.STAND)) != Action.STAND)
+				hit(player);
 
 			if (action == Action.STAND)
 				view.displayStand(player);
 
-			// Deal cards to the dealer until their score is >= 17.
-			while (dealer.score() < 17)
+			// Don't continue if player busts or gets 21.
+			if (player.score() < 21)
 			{
-				dealCard(dealer);
-				view.displayHit(dealer);
-			}
+				// Deal cards to the dealer until their score is >= 17.
+				while (dealer.score() < 17)
+					hit(dealer);
 
-			// Display if dealer stood or not.
-			if (dealer.score() <= 21)
-				view.displayStand(dealer);
+				// Display if dealer stood or not.
+				if (dealer.score() <= 21)
+					view.displayStand(dealer);
+			}
 
 			winnerCheck();
 
@@ -95,6 +110,18 @@ public class StandardController extends ControllerBase
 			if (!keepPlaying)
 				view.displayQuit();
 		}
+	}
+
+	/**
+	 * Hits the player/dealer with a random card from the shoe.
+	 *
+	 * @param player the player which should be hit.
+	 */
+	public void hit(PlayerBase player)
+	{
+		dealCard(player);
+		view.displayHit(player);
+		view.displayHand(player, player.score());
 	}
 
 	/**
@@ -190,5 +217,25 @@ public class StandardController extends ControllerBase
 		Card card = shoe.pick();
 		card.setHidden(hidden);
 		player.addCard(card);
+	}
+
+	/**
+	 * Returns the player object.
+	 *
+	 * @return the player object.
+	 */
+	public Player getPlayer()
+	{
+		return player;
+	}
+
+	/**
+	 * Returns the player object.
+	 *
+	 * @return the player object.
+	 */
+	public Dealer getDealer()
+	{
+		return dealer;
 	}
 }
