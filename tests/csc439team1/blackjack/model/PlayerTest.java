@@ -48,7 +48,7 @@ public class PlayerTest
 	}
 
 	@Test
-	public void playerBase_addCardTest()
+	public void playerBaseAddCardTest()
 	{
 		Player player = new Player();
 		player.getHand().addCard(new Card(Number.ACE, Suit.HEARTS));
@@ -56,11 +56,20 @@ public class PlayerTest
 	}
 
 	@Test
-	public void playerBase_scoreTest()
+	public void playerBaseScoreTest()
 	{
 		Player player = new Player();
-		player.getHand().addCard(new Card(Number.ACE, Suit.HEARTS));
+		player.addCard(new Card(Number.ACE, Suit.HEARTS));
 		int score = player.score();
 		Assert.assertEquals(Number.ACE.getValue(), score);
+	}
+
+	@Test
+	public void clearHand()
+	{
+		Player player = new Player();
+		player.addCard(new Card(Number.ACE, Suit.HEARTS));
+		player.clearHand();
+		assertThat(player.getHand().getCards().size(), is(0));
 	}
 }

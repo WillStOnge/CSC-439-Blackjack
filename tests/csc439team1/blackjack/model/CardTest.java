@@ -43,4 +43,11 @@ public class CardTest
 
 		assertThat(card.isHidden(), is(true));
 	}
+
+	@Test
+	public void testToString()
+	{
+		Card card = new Card(Number.ACE, Suit.SPADES);
+		assertThat(card.toString(), is("ACE of SPADES"));
+	}
 }
