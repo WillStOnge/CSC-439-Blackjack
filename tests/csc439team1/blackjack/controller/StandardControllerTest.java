@@ -1,11 +1,12 @@
 package csc439team1.blackjack.controller;
 
-import csc439team1.blackjack.model.Action;
-import csc439team1.blackjack.model.Player;
+import csc439team1.blackjack.model.*;
+import csc439team1.blackjack.model.Number;
 import csc439team1.blackjack.view.TestView;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.isA;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StandardControllerTest
@@ -18,7 +19,7 @@ public class StandardControllerTest
 	}
 
 	@Test
-	public void playBlackjack1()
+	public void playBlackjackImmediateStand()
 	{
 		TestView view = new TestView();
 		StandardController controller = new StandardController(view);
@@ -28,9 +29,78 @@ public class StandardControllerTest
 	}
 
 	@Test
-	public void winnerCheck()
+	public void playBlackjackDouble()
+	{
+		TestView view = new TestView();
+		StandardController controller = new StandardController(view);
+
+		view.setAction(Action.DOUBLE);
+		controller.playBlackjack();
+	}
+
+	@Test
+	public void winnerCheckPlayerBust()
 	{
 		StandardController controller = new StandardController(new TestView());
+
+		Player player = controller.getPlayer();
+		player.addCard(new Card(Number.KING, Suit.SPADES));
+		player.addCard(new Card(Number.KING, Suit.SPADES));
+		player.addCard(new Card(Number.KING, Suit.SPADES));
+
+		controller.winnerCheck();
+	}
+
+	@Test
+	public void winnerCheckDealerBust()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		Dealer dealer = controller.getDealer();
+		dealer.addCard(new Card(Number.KING, Suit.SPADES));
+		dealer.addCard(new Card(Number.KING, Suit.SPADES));
+		dealer.addCard(new Card(Number.KING, Suit.SPADES));
+
+		controller.winnerCheck();
+	}
+
+	@Test
+	public void winnerCheckPlayerWin()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		Player player = controller.getPlayer();
+		player.addCard(new Card(Number.KING, Suit.SPADES));
+		player.addCard(new Card(Number.KING, Suit.SPADES));
+
+		controller.winnerCheck();
+	}
+
+	@Test
+	public void winnerCheckDealerWin()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		Dealer dealer = controller.getDealer();
+		dealer.addCard(new Card(Number.KING, Suit.SPADES));
+		dealer.addCard(new Card(Number.KING, Suit.SPADES));
+
+		controller.winnerCheck();
+	}
+
+	@Test
+	public void winnerCheckTie()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		Player player = controller.getPlayer();
+		player.addCard(new Card(Number.KING, Suit.SPADES));
+		player.addCard(new Card(Number.KING, Suit.SPADES));
+
+		Dealer dealer = controller.getDealer();
+		dealer.addCard(new Card(Number.KING, Suit.SPADES));
+		dealer.addCard(new Card(Number.KING, Suit.SPADES));
+
 		controller.winnerCheck();
 	}
 
@@ -111,12 +181,43 @@ public class StandardControllerTest
 	}
 
 	@Test
-	public void dealCard()
+	public void hit()
 	{
 		StandardController controller = new StandardController(new TestView());
-		Player player = new Player();
-		controller.dealCard(player);
+		controller.hit(controller.getPlayer());
 
-		assertThat(player.getHand().size(), is(1));
+		assertThat(controller.getPlayer().getHand().getCards().size(), is(1));
+	}
+
+	@Test
+	public void getPlayer()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		assertThat(controller.getPlayer(), isA(Player.class));
+	}
+
+	@Test
+	public void getDealer()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		assertThat(controller.getDealer(), isA(Dealer.class));
+	}
+
+	@Test
+	public void doubleBetDouble()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		assertThat(controller.doubleBet(Action.DOUBLE), is(true));
+	}
+
+	@Test
+	public void doubleBetHit()
+	{
+		StandardController controller = new StandardController(new TestView());
+
+		assertThat(controller.doubleBet(Action.HIT), is(false));
 	}
 }

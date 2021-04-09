@@ -1,6 +1,7 @@
 package csc439team1.blackjack.view;
 
 import csc439team1.blackjack.model.Action;
+import csc439team1.blackjack.model.Player;
 import csc439team1.blackjack.model.PlayerBase;
 
 /**
@@ -109,4 +110,9 @@ public abstract class ViewBase
      * @return the selected action of the user determining if they will continue playing or not
      */
     public abstract boolean promptKeepPlaying();
+
+    /**
+     * A display output message that indicates a double has occurred in the game.
+     */
+	public abstract void displayDouble();
 }

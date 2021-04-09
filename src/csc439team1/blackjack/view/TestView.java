@@ -136,6 +136,12 @@ public class TestView extends ViewBase
 	}
 
 	/**
+	 * A display output message that indicates a double has occurred in the game.
+	 */
+	@Override
+	public void displayDouble() { }
+
+	/**
 	 * Set the bet field for testing.
 	 *
 	 * @param bet the new bet value.

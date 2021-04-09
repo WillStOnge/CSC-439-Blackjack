@@ -243,6 +243,15 @@ public class CLIView extends ViewBase
     }
 
     /**
+     * A display output message that indicates a double has occurred in the game.
+     */
+    @Override
+    public void displayDouble()
+    {
+        System.out.println("You doubled your bet!");
+    }
+
+    /**
      * A helper method that assists prompt methods with scanning input. Checks for quit.
      *
      * @return the input from the line
@@ -251,7 +260,7 @@ public class CLIView extends ViewBase
     {
         String line = input.nextLine();
 
-        if (line.toLowerCase().equals("quit"))
+        if (line.equalsIgnoreCase("quit"))
         {
             displayQuit();
             System.exit(0);

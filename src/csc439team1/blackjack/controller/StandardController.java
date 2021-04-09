@@ -58,20 +58,7 @@ public class StandardController extends ControllerBase
 
 			// Check if player wants to double. They can only double if their score is between 9 and 11 after the first 2 cards are dealt.
 			if (player.score() >= 9 && player.score() <= 11 && (action = view.promptAction(Action.HIT, Action.STAND, Action.DOUBLE)) != Action.STAND)
-			{
-				hit(player);
-
-				if (action == Action.DOUBLE)
-				{
-					player.removeChips(player.getBet());
-					player.setBet(player.getBet());
-					doubled = true;
-
-					// Force player to stand if they don't bust.
-					if (player.score() <= 21)
-						action = Action.STAND;
-				}
-			}
+				doubled = doubleBet(action);
 
 			// Keep prompting the player until they stand, bust, or reach a score of 21.
 			while (!doubled && player.score() < 21 && (action = view.promptAction(Action.HIT, Action.STAND)) != Action.STAND)
@@ -110,6 +97,23 @@ public class StandardController extends ControllerBase
 			if (!keepPlaying)
 				view.displayQuit();
 		}
+	}
+
+	public boolean doubleBet(Action action)
+	{
+		if (action == Action.DOUBLE)
+		{
+			view.displayDouble();
+			player.removeChips(player.getBet());
+			player.setBet(player.getBet());
+			hit(player);
+
+			return true;
+		}
+
+		hit(player);
+
+		return false;
 	}
 
 	/**
