@@ -1,18 +1,21 @@
 package csc439team1.blackjack.model;
 
+import java.util.logging.Logger;
+
 /**
  * The Card class is used to create a objects that represents a
  * single playing card from a deck and includes the following properties:
  * Number and Suit.
  *
  * @author Justin Gallagher
- * @version 0.1
+ * @version 0.4
  */
 public class Card
 {
 	private final Number number;
 	private final Suit suit;
 	private boolean hidden;
+	private final Logger logger;
 
 	/**
 	 * Card class constructor that sets the number and suit of the card.
@@ -22,9 +25,7 @@ public class Card
 	 */
 	public Card(Number number, Suit suit)
 	{
-		this.number = number;
-		this.suit = suit;
-		this.hidden = false;
+		this(number, suit, false);
 	}
 
 	/**
@@ -36,9 +37,12 @@ public class Card
 	 */
 	public Card(Number number, Suit suit, boolean hidden)
 	{
+		logger = Logger.getLogger(getClass().getName());
+		logger.entering(getClass().getName(), "Card");
 		this.number = number;
 		this.suit = suit;
 		this.hidden = hidden;
+		logger.exiting(getClass().getName(), "Card");
 	}
 
 	/**
@@ -48,6 +52,8 @@ public class Card
 	 */
 	public Number getNumber()
 	{
+		logger.entering(getClass().getName(), "getNumber");
+		logger.exiting(getClass().getName(), "getNumber");
 		return number;
 	}
 
@@ -58,6 +64,8 @@ public class Card
 	 */
 	public Suit getSuit()
 	{
+		logger.entering(getClass().getName(), "getSuit");
+		logger.exiting(getClass().getName(), "getSuit");
 		return suit;
 	}
 
@@ -68,6 +76,8 @@ public class Card
 	 */
 	public boolean isHidden()
 	{
+		logger.entering(getClass().getName(), "isHidden");
+		logger.exiting(getClass().getName(), "isHidden");
 		return hidden;
 	}
 
@@ -78,7 +88,9 @@ public class Card
 	 */
 	public void setHidden(boolean hidden)
 	{
+		logger.entering(getClass().getName(), "setHidden");
 		this.hidden = hidden;
+		logger.exiting(getClass().getName(), "setHidden");
 	}
 
 	/**
@@ -89,6 +101,8 @@ public class Card
 	@Override
 	public String toString()
 	{
+		logger.entering(getClass().getName(), "toString");
+		logger.exiting(getClass().getName(), "toString");
 		return hidden ? "### of ###" : number + " of " + suit;
 	}
 }

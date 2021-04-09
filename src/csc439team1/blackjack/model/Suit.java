@@ -1,10 +1,12 @@
 package csc439team1.blackjack.model;
 
+import java.util.logging.Logger;
+
 /**
  * The Suit enum represents the 4 types of playing card suits.
  *
  * @author Justin Gallagher
- * @version 0.1
+ * @version 0.4
  */
 public enum Suit
 {
@@ -14,6 +16,7 @@ public enum Suit
 	CLUBS("CLUBS");
 
 	private final String name;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
 
 	/**
 	 * Suit enum constructor that sets the name of the suit.
@@ -22,7 +25,9 @@ public enum Suit
 	 */
 	Suit(String name)
 	{
+		logger.entering(getClass().getName(), "Suit");
 		this.name = name;
+		logger.exiting(getClass().getName(), "Suit");
 	}
 
 	/**
@@ -34,6 +39,8 @@ public enum Suit
 	@Override
 	public String toString()
 	{
+		logger.entering(getClass().getName(), "toString");
+		logger.exiting(getClass().getName(), "toString");
 		return name;
 	}
 }

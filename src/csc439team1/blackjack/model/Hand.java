@@ -2,23 +2,28 @@ package csc439team1.blackjack.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * The Hand class is used to hold the current cards held by a player.
  *
  * @author Will St. Onge
- * @version 0.2
+ * @version 0.4
  */
 public class Hand
 {
 	private final List<Card> cards;
+	private final Logger logger;
 
 	/**
 	 * Hand class constructor that sets up the internal card list.
 	 */
 	public Hand()
 	{
+		logger = Logger.getLogger(getClass().getName());
+		logger.entering(getClass().getName(), "Hand");
 		cards = new ArrayList<>();
+		logger.exiting(getClass().getName(), "Hand");
 	}
 
 	/**
@@ -28,6 +33,8 @@ public class Hand
 	 */
 	public List<Card> getCards()
 	{
+		logger.entering(getClass().getName(), "getCards");
+		logger.exiting(getClass().getName(), "getCards");
 		return cards;
 	}
 
@@ -38,7 +45,9 @@ public class Hand
 	 */
 	public void addCard(Card card)
 	{
+		logger.entering(getClass().getName(), "addCard");
 		cards.add(card);
+		logger.exiting(getClass().getName(), "addCard");
 	}
 
 	/**
@@ -48,6 +57,8 @@ public class Hand
 	 */
 	public int size()
 	{
+		logger.entering(getClass().getName(), "size");
+		logger.exiting(getClass().getName(), "size");
 		return cards.size();
 	}
 
@@ -58,6 +69,8 @@ public class Hand
 	 */
 	public int score()
 	{
+		logger.entering(getClass().getName(), "score");
+
 		int score = 0, aces = 0;
 		Number number;
 
@@ -68,7 +81,10 @@ public class Hand
 			score += number.getValue();
 
 			if (number == Number.ACE)
+			{
+				logger.info("Found an ace in the hand.");
 				aces++;
+			}
 		}
 
 		// Subtract 10 for each ace if we are over 21.
@@ -77,6 +93,10 @@ public class Hand
 			score -= 10;
 			aces--;
 		}
+
+		logger.info("Computed score was " + score);
+
+		logger.exiting(getClass().getName(), "score");
 
 		return score;
 	}

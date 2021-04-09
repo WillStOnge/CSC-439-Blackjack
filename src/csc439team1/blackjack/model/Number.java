@@ -1,11 +1,13 @@
 package csc439team1.blackjack.model;
 
+import java.util.logging.Logger;
+
 /**
  * The Number enum represents the 13 types of playing card 'numbers'.
  * Note the ordering of the card numbers: ACE, TWO, THREE, ... , KING.
  *
  * @author Justin Gallagher and Will St. Onge
- * @version 0.3
+ * @version 0.4
  */
 public enum Number
 {
@@ -25,6 +27,7 @@ public enum Number
 
 	private final String name;
 	private final int value;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
 
 	/**
 	 * Number enum constructor that sets the name of the number.
@@ -34,8 +37,10 @@ public enum Number
 	 */
 	Number(String name, int value)
 	{
+		logger.entering(getClass().getName(), "Number");
 		this.name = name;
 		this.value = value;
+		logger.exiting(getClass().getName(), "Number");
 	}
 
 	/**
@@ -47,6 +52,8 @@ public enum Number
 	@Override
 	public String toString()
 	{
+		logger.entering(getClass().getName(), "toString");
+		logger.exiting(getClass().getName(), "toString");
 		return name;
 	}
 
@@ -57,6 +64,8 @@ public enum Number
 	 */
 	public int getValue()
 	{
+		logger.entering(getClass().getName(), "getValue");
+		logger.exiting(getClass().getName(), "getValue");
 		return value;
 	}
 }
