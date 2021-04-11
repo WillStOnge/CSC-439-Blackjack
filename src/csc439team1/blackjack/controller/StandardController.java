@@ -99,6 +99,12 @@ public class StandardController extends ControllerBase
 		}
 	}
 
+	/**
+	 * Checks if the players wants to double their bet. If they do, they get hit and either bust or stand.
+	 *
+	 * @param action the action the player took.
+	 * @return whether the bet was doubled or the player was just hit.
+	 */
 	public boolean doubleBet(Action action)
 	{
 		if (action == Action.DOUBLE)
