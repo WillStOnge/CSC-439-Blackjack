@@ -7,7 +7,7 @@ import csc439team1.blackjack.view.ViewBase;
  * The standard blackjack controller. This is the brains of the program and contains all of the core game logic.
  *
  * @author Will St. Onge
- * @version 0.3
+ * @version 0.4
  */
 public class StandardController extends ControllerBase
 {
@@ -46,6 +46,8 @@ public class StandardController extends ControllerBase
 			boolean doubled = false;
 
 			placeBet();
+
+			shoe.cut();
 
 			// Deal initial cards to dealer and player
 			dealCard(player);

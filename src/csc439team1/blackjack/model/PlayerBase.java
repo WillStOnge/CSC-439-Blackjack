@@ -1,21 +1,27 @@
 package csc439team1.blackjack.model;
 
+import java.util.logging.Logger;
+
 /**
  * The PlayerBase abstract class gives base functionality for Player and Dealer alike.
  *
  * @author Alex Smithson
- * @version 0.3
+ * @version 0.4
  **/
 public abstract class PlayerBase
 {
 	private final Hand hand;
+	private final Logger logger;
 
 	/**
 	 * Constructor for the abstract player base class.
 	 */
 	public PlayerBase()
 	{
+		logger = Logger.getLogger(getClass().getName());
+		logger.entering(getClass().getName(), "PlayerBase");
 		hand = new Hand();
+		logger.exiting(getClass().getName(), "PlayerBase");
 	}
 
 	/**
@@ -26,6 +32,8 @@ public abstract class PlayerBase
 	 */
 	public int score()
 	{
+		logger.entering(getClass().getName(), "score");
+		logger.exiting(getClass().getName(), "score");
 		return hand.score();
 	}
 
@@ -36,7 +44,9 @@ public abstract class PlayerBase
 	 */
 	public void addCard(Card card)
 	{
+		logger.entering(getClass().getName(), "addCard");
 		hand.addCard(card);
+		logger.exiting(getClass().getName(), "addCard");
 	}
 
 	/**
@@ -46,6 +56,8 @@ public abstract class PlayerBase
 	 */
 	public Hand getHand()
 	{
+		logger.entering(getClass().getName(), "getHand");
+		logger.exiting(getClass().getName(), "getHand");
 		return hand;
 	}
 
@@ -54,6 +66,8 @@ public abstract class PlayerBase
 	 */
 	public void clearHand()
 	{
+		logger.entering(getClass().getName(), "clearHand");
 		hand.getCards().clear();
+		logger.exiting(getClass().getName(), "clearHand");
 	}
 }

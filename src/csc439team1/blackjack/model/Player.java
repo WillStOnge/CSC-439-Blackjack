@@ -1,15 +1,18 @@
 package csc439team1.blackjack.model;
 
+import java.util.logging.Logger;
+
 /**
  * Represents the player who has a number of chips and may place a bet
  *
  * @author Alex Smithson
- * @version 0.3
+ * @version 0.4
  */
 public class Player extends PlayerBase
 {
 	private int chips;
 	private int bet;
+	private final Logger logger;
 
 	/**
 	 * Constructor for the player class.
@@ -17,8 +20,11 @@ public class Player extends PlayerBase
 	public Player()
 	{
 		super();
+		logger = Logger.getLogger(getClass().getName());
+		logger.entering(getClass().getName(), "Player");
 		chips = 0;
 		bet = 0;
+		logger.exiting(getClass().getName(), "Player");
 	}
 
 	/**
@@ -28,6 +34,8 @@ public class Player extends PlayerBase
 	 */
 	public int getChips()
 	{
+		logger.entering(getClass().getName(), "getChips");
+		logger.exiting(getClass().getName(), "getChips");
 		return chips;
 	}
 
@@ -38,7 +46,9 @@ public class Player extends PlayerBase
 	 */
 	public void setChips(int chips)
 	{
+		logger.entering(getClass().getName(), "setChips");
 		this.chips = chips;
+		logger.exiting(getClass().getName(), "setChips");
 	}
 
 	/**
@@ -48,7 +58,9 @@ public class Player extends PlayerBase
 	 */
 	public void addChips(int chips)
 	{
+		logger.entering(getClass().getName(), "addChips");
 		this.chips += chips;
+		logger.exiting(getClass().getName(), "addChips");
 	}
 
 	/**
@@ -58,7 +70,9 @@ public class Player extends PlayerBase
 	 */
 	public void removeChips(int chips)
 	{
+		logger.entering(getClass().getName(), "removeChips");
 		this.chips -= chips;
+		logger.exiting(getClass().getName(), "removeChips");
 	}
 
 	/**
@@ -68,6 +82,8 @@ public class Player extends PlayerBase
 	 */
 	public int getBet()
 	{
+		logger.entering(getClass().getName(), "getBet");
+		logger.exiting(getClass().getName(), "getBet");
 		return bet;
 	}
 
@@ -78,6 +94,8 @@ public class Player extends PlayerBase
 	 */
 	public void setBet(int bet)
 	{
+		logger.entering(getClass().getName(), "setBet");
 		this.bet = bet;
+		logger.exiting(getClass().getName(), "setBet");
 	}
 }
