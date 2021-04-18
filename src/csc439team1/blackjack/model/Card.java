@@ -38,11 +38,11 @@ public class Card
 	public Card(Number number, Suit suit, boolean hidden)
 	{
 		logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "Card");
+		logger.entering(getClass().getName(), "Card constructor");
 		this.number = number;
 		this.suit = suit;
 		this.hidden = hidden;
-		logger.exiting(getClass().getName(), "Card");
+		logger.exiting(getClass().getName(), "Card constructor");
 	}
 
 	/**

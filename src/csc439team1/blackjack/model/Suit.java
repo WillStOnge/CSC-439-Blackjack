@@ -25,9 +25,9 @@ public enum Suit
 	 */
 	Suit(String name)
 	{
-		logger.entering(getClass().getName(), "Suit");
+		logger.entering(getClass().getName(), "Suit constructor");
 		this.name = name;
-		logger.exiting(getClass().getName(), "Suit");
+		logger.exiting(getClass().getName(), "Suit constructor");
 	}
 
 	/**

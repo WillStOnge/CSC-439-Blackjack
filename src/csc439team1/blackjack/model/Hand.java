@@ -21,9 +21,9 @@ public class Hand
 	public Hand()
 	{
 		logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "Hand");
+		logger.entering(getClass().getName(), "Hand constructor");
 		cards = new ArrayList<>();
-		logger.exiting(getClass().getName(), "Hand");
+		logger.exiting(getClass().getName(), "Hand constructor");
 	}
 
 	/**

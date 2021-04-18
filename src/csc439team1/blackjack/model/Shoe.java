@@ -27,7 +27,7 @@ public class Shoe
 	public Shoe(int numDecks)
 	{
 		logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "Shoe");
+		logger.entering(getClass().getName(), "Shoe constructor");
 
 		rand = new Random();
 		shoe = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Shoe
 		for (int i = 0; i < numDecks; i++)
 			shoe.add(new Deck());
 
-		logger.exiting(getClass().getName(), "Shoe");
+		logger.exiting(getClass().getName(), "Shoe constructor");
 	}
 
 	/**

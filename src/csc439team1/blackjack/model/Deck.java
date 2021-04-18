@@ -27,7 +27,7 @@ public class Deck
 	public Deck()
 	{
 		logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "Deck");
+		logger.entering(getClass().getName(), "Deck constructor");
 
 		deck = new ArrayList<>();
 		rand = new Random();
@@ -36,7 +36,7 @@ public class Deck
 			for (Suit curSuit : Suit.values())
 				deck.add(new Card(curNumber, curSuit));
 
-		logger.exiting(getClass().getName(), "Deck");
+		logger.exiting(getClass().getName(), "Deck constructor");
 	}
 
 	/**

@@ -24,9 +24,9 @@ public enum Action
 	 */
 	Action(String name)
 	{
-		logger.entering(getClass().getName(), "Action");
+		logger.entering(getClass().getName(), "Action constructor");
 		this.name = name;
-		logger.exiting(getClass().getName(), "Action");
+		logger.exiting(getClass().getName(), "Action constructor");
 	}
 
 	/**

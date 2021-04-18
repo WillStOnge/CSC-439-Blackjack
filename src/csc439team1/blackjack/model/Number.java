@@ -37,10 +37,10 @@ public enum Number
 	 */
 	Number(String name, int value)
 	{
-		logger.entering(getClass().getName(), "Number");
+		logger.entering(getClass().getName(), "Number constructor");
 		this.name = name;
 		this.value = value;
-		logger.exiting(getClass().getName(), "Number");
+		logger.exiting(getClass().getName(), "Number constructor");
 	}
 
 	/**

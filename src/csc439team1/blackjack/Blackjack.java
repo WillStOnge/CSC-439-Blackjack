@@ -4,6 +4,8 @@ import csc439team1.blackjack.controller.StandardController;
 import csc439team1.blackjack.view.CLIView;
 import csc439team1.blackjack.view.ViewBase;
 
+import java.util.logging.Logger;
+
 /**
  * This class holds the main method that initiates the blackjack game.
  *
@@ -19,8 +21,11 @@ public class Blackjack
 	 */
 	public static void main(String[] args)
 	{
+		Logger logger = Logger.getLogger(Blackjack.class.getName());
+		logger.entering(Blackjack.class.getName(), "main");
 		ViewBase view = new CLIView();
 		StandardController controller = new StandardController(view);
 		controller.playBlackjack();
+		logger.exiting(Blackjack.class.getName(), "main");
 	}
 }
