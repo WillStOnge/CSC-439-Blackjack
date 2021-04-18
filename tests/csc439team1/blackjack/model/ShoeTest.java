@@ -43,4 +43,15 @@ public class ShoeTest
 		Shoe shoe = new Shoe(numDecks);
 		assertEquals(shoe.size(), numDecks * 52);
 	}
+
+	@Test
+	public void cutTest()
+	{
+		int numDecks = 3;
+		Shoe shoe = new Shoe(numDecks);
+		for (int i = 0; i < 136; i++)
+			shoe.pick();
+		shoe.cut();
+		assertEquals(shoe.size(), numDecks * 52);
+	}
 }

@@ -16,6 +16,8 @@ public class Shoe
 {
 	private final Random rand;
 	private final List<Deck> shoe;
+	private final int min;
+	private final int max;
 	private final Logger logger;
 
 	/**
@@ -27,15 +29,17 @@ public class Shoe
 	public Shoe(int numDecks)
 	{
 		logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "Shoe constructor");
+		logger.entering(getClass().getName(), "Shoe");
 
 		rand = new Random();
 		shoe = new ArrayList<>();
+		max = numDecks;
 
 		for (int i = 0; i < numDecks; i++)
 			shoe.add(new Deck());
 
-		logger.exiting(getClass().getName(), "Shoe constructor");
+		min = this.size() / 5;
+		logger.exiting(getClass().getName(), "Shoe");
 	}
 
 	/**
@@ -93,5 +97,23 @@ public class Shoe
 		logger.exiting(getClass().getName(), "size");
 
 		return numCards;
+	}
+
+	/**
+	 * The cut method cuts the shoe when the size of the shoe reaches a minimum value and then
+	 * re-populates it.
+	 */
+	public void cut()
+	{
+		logger.entering(getClass().getName(), "cut");
+
+		if (size() <= min)
+		{
+			this.shoe.clear();
+			for (int i = 0; i < max; i++)
+				this.shoe.add(new Deck());
+		}
+
+		logger.exiting(getClass().getName(), "cut");
 	}
 }
