@@ -3,6 +3,8 @@ package csc439team1.blackjack.controller;
 import csc439team1.blackjack.model.*;
 import csc439team1.blackjack.view.ViewBase;
 
+import java.util.logging.Logger;
+
 /**
  * The standard blackjack controller. This is the brains of the program and contains all of the core game logic.
  *
@@ -14,6 +16,8 @@ public class StandardController extends ControllerBase
 	private final int BET_RETURNED;
 	private final Player player;
 	private final Shoe shoe;
+	private final Logger logger = Logger.getLogger(this.getClass().getName());
+
 
 	/**
 	 * Constructs a new standard controller. Call playBlackjack() to start playing blackjack.
@@ -23,9 +27,12 @@ public class StandardController extends ControllerBase
 	public StandardController(ViewBase view)
 	{
 		super(view);
+		logger.entering(getClass().getName(), "constructor");
 		player = new Player();
 		shoe = new Shoe(3);
 		BET_RETURNED = 2;
+		logger.exiting(getClass().getName(), "constructor");
+
 	}
 
 	/**
@@ -35,6 +42,7 @@ public class StandardController extends ControllerBase
 	@Override
 	public void playBlackjack()
 	{
+		logger.entering(getClass().getName(), "playBlackjack");
 		boolean keepPlaying = true;
 
 		view.displayStartGame();
@@ -99,16 +107,19 @@ public class StandardController extends ControllerBase
 			if (!keepPlaying)
 				view.displayQuit();
 		}
+		logger.exiting(getClass().getName(), "playBlackjack");
 	}
 
 	/**
 	 * Checks if the players wants to double their bet. If they do, they get hit and either bust or stand.
 	 *
 	 * @param action the action the player took.
-	 * @return whether the bet was doubled or the player was just hit.
+	 * @return doubledQ whether the bet was doubled or the player was just hit.
 	 */
 	public boolean doubleBet(Action action)
 	{
+		logger.entering(getClass().getName(), "doubleBet");
+		boolean doubledQ = false;
 		if (action == Action.DOUBLE)
 		{
 			view.displayDouble();
@@ -116,12 +127,12 @@ public class StandardController extends ControllerBase
 			player.setBet(player.getBet());
 			hit(player);
 
-			return true;
+			doubledQ = true;
 		}
 
 		hit(player);
-
-		return false;
+		logger.exiting(getClass().getName(), "doubleBet");
+		return doubledQ;
 	}
 
 	/**
@@ -131,9 +142,12 @@ public class StandardController extends ControllerBase
 	 */
 	public void hit(PlayerBase player)
 	{
+		logger.entering(getClass().getName(), "hit");
 		dealCard(player);
 		view.displayHit(player);
 		view.displayHand(player, player.score());
+		logger.exiting(getClass().getName(), "hit");
+
 	}
 
 	/**
@@ -141,6 +155,7 @@ public class StandardController extends ControllerBase
 	 */
 	public void winnerCheck()
 	{
+		logger.entering(getClass().getName(), "winnerCheck");
 		// Check for any busts.
 		if (player.score() > 21)
 		{
@@ -177,6 +192,7 @@ public class StandardController extends ControllerBase
 				player.setBet(0);
 			}
 		}
+		logger.exiting(getClass().getName(), "winnerCheck");
 	}
 
 	/**
@@ -184,15 +200,25 @@ public class StandardController extends ControllerBase
 	 */
 	public void placeBet()
 	{
+		logger.entering(getClass().getName(), "placeBet");
 		int bet = view.promptPlayerBet();
 
-		if (bet > player.getChips())
-			throw new IllegalArgumentException("Bet must be less than equal to the number of chips held.");
-		if (bet < 10 || bet > 500)
-			throw new IllegalArgumentException("Bet must be between 10 and 500.");
+		IllegalArgumentException ex;
+		if (bet > player.getChips()) {
+			ex = new IllegalArgumentException("Bet must be less than equal to the number of chips held.");
+			logger.throwing(getClass().getName(), "placeBet", ex);
+			throw ex;
+		}
+		if (bet < 10 || bet > 500) {
+			ex = new IllegalArgumentException("Bet must be between 10 and 500.");
+			logger.throwing(getClass().getName(), "placeBet", ex);
+			throw ex;
 
+		}
 		player.setBet(bet);
 		player.removeChips(bet);
+		logger.exiting(getClass().getName(), "placeBet");
+
 	}
 
 	/**
@@ -200,12 +226,18 @@ public class StandardController extends ControllerBase
 	 */
 	public void buyChips()
 	{
+		logger.entering(getClass().getName(), "buyChips");
+
 		int chips = view.promptBuyChips();
 
-		if (chips < 10)
-			throw new IllegalArgumentException("You must buy at least 10 chips");
-
+		if (chips < 10) {
+			IllegalArgumentException ex = new IllegalArgumentException("You must buy at least 10 chips");
+			logger.throwing(getClass().getName(), "buyChips", ex);
+			throw ex;
+		}
 		player.setChips(chips);
+		logger.exiting(getClass().getName(), "buyChips");
+
 	}
 
 	/**
@@ -226,9 +258,11 @@ public class StandardController extends ControllerBase
 	 */
 	public void dealCard(PlayerBase player, boolean hidden)
 	{
+		logger.entering(getClass().getName(), "dealCard");
 		Card card = shoe.pick();
 		card.setHidden(hidden);
 		player.addCard(card);
+		logger.exiting(getClass().getName(), "dealCard");
 	}
 
 	/**
@@ -238,6 +272,8 @@ public class StandardController extends ControllerBase
 	 */
 	public Player getPlayer()
 	{
+		logger.entering(getClass().getName(), "getPlayer");
+		logger.exiting(getClass().getName(), "getPlayer");
 		return player;
 	}
 
@@ -248,6 +284,8 @@ public class StandardController extends ControllerBase
 	 */
 	public Dealer getDealer()
 	{
+		logger.entering(getClass().getName(), "getDealer");
+		logger.exiting(getClass().getName(), "getDealer");
 		return dealer;
 	}
 }

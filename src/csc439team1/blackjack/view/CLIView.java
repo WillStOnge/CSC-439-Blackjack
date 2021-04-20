@@ -6,6 +6,7 @@ import csc439team1.blackjack.model.PlayerBase;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 /**
  * The CLIView class is an is the class that interacts with the user by displaying output to
@@ -17,13 +18,17 @@ import java.util.Scanner;
 public class CLIView extends ViewBase
 {
     Scanner input;
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     /**
      * Sets up the console scanner for the view.
      */
     public CLIView()
     {
+        logger.entering(getClass().getName(), "constructor");
         input = new Scanner(System.in);
+        logger.exiting(getClass().getName(), "constructor");
+
     }
 
     /**
@@ -32,9 +37,11 @@ public class CLIView extends ViewBase
     @Override
     public void displayStartGame()
     {
+        logger.entering(getClass().getName(), "displayStartGame");
         System.out.println("Welcome to Blackjack! The game will now begin.");
         System.out.println("First, we will buy chips so you can begin betting.");
         System.out.println("Note that you can type 'quit' and hit the ENTER key anytime to exit the game.");
+        logger.exiting(getClass().getName(), "displayStartGame");
     }
 
     /**
@@ -48,6 +55,7 @@ public class CLIView extends ViewBase
     @Override
     public void displayHand(PlayerBase player, int score)
     {
+        logger.entering(getClass().getName(), "displayHand");
         if (player instanceof Player)
         {
             System.out.println("Your current hand score: " + score);
@@ -55,6 +63,7 @@ public class CLIView extends ViewBase
         }
         else
             System.out.println("The dealer's hand : " + Arrays.toString(player.getHand().getCards().toArray()));
+        logger.exiting(getClass().getName(), "displayHand");
     }
 
     /**
@@ -63,7 +72,9 @@ public class CLIView extends ViewBase
     @Override
     public void displayQuit()
     {
+        logger.entering(getClass().getName(), "displayHand");
         System.out.println("Quitting game now, thank you for playing!");
+        logger.exiting(getClass().getName(), "displayHand");
     }
 
     /**
@@ -83,10 +94,12 @@ public class CLIView extends ViewBase
     @Override
     public void displayWinner(PlayerBase player)
     {
+        logger.entering(getClass().getName(), "displayWinner");
         if (player instanceof Player)
             System.out.println("You win! Score: " + player.score());
         else
             System.out.println("Dealer wins! Score: " + player.score());
+        logger.exiting(getClass().getName(), "displayWinner");
     }
 
     /**
@@ -97,10 +110,12 @@ public class CLIView extends ViewBase
     @Override
     public void displayBust(PlayerBase player)
     {
+        logger.entering(getClass().getName(), "displayBust");
         if (player instanceof Player)
             System.out.println("You bust!");
         else
             System.out.println("Dealer bust! Score: " + player.score());
+        logger.exiting(getClass().getName(), "displayWinner");
     }
 
     /**
@@ -111,10 +126,12 @@ public class CLIView extends ViewBase
     @Override
     public void displayScore(PlayerBase player)
     {
+        logger.entering(getClass().getName(), "displayScore");
         if (player instanceof Player)
             System.out.println("Your current score is: " + player.score());
         else
             System.out.println("The dealer's current score is: " + player.score());
+        logger.exiting(getClass().getName(), "displayScore");
     }
 
     /**
@@ -125,7 +142,9 @@ public class CLIView extends ViewBase
     @Override
     public void displayTie(int score)
     {
+        logger.entering(getClass().getName(), "displayTie");
         System.out.println("Tie! Score: " + score);
+        logger.exiting(getClass().getName(), "displayTie");
     }
 
     /**
@@ -136,11 +155,12 @@ public class CLIView extends ViewBase
     @Override
     public void displayHit(PlayerBase player)
     {
+        logger.entering(getClass().getName(), "displayHit");
         if (player instanceof Player)
             System.out.println("You hit!");
         else
             System.out.println("Dealer hit!");
-
+        logger.exiting(getClass().getName(), "displayHit");
     }
 
     /**
@@ -151,10 +171,14 @@ public class CLIView extends ViewBase
     @Override
     public void displayStand(PlayerBase player)
     {
+        logger.entering(getClass().getName(), "displayStand");
+
         if (player instanceof Player)
             System.out.println("You stand!");
         else
             System.out.println("Dealer stand!");
+        logger.exiting(getClass().getName(), "displayStand");
+
     }
 
     /**
@@ -165,8 +189,11 @@ public class CLIView extends ViewBase
     @Override
     public int promptBuyChips()
     {
+        logger.entering(getClass().getName(), "promptBuyChips");
+
         System.out.print("How many chips would you like to buy?: ");
 
+        logger.exiting(getClass().getName(), "promptBuyChips");
         return validateInteger(lineScanner());
     }
 
@@ -178,9 +205,12 @@ public class CLIView extends ViewBase
     @Override
     public int promptPlayerBet()
     {
+        logger.entering(getClass().getName(), "promptPlayerBet");
+
         System.out.println("How many chips would you like to bet?");
         System.out.print("(Note that this game only allows bets from 10-500 chips): ");
 
+        logger.exiting(getClass().getName(), "promptPlayerBet");
         return validateInteger(lineScanner());
     }
 
@@ -194,6 +224,8 @@ public class CLIView extends ViewBase
     @Override
     public Action promptAction(Action... actions)
     {
+        logger.entering(getClass().getName(), "promptAction");
+
         Action returnedAction;
         String line;
         System.out.print("Type one of the following to make a choice: " + Arrays.toString(actions) + " ");
@@ -207,11 +239,14 @@ public class CLIView extends ViewBase
 
                 if (!Arrays.asList(actions).contains(returnedAction))
                     System.out.println("That is not allowed, try again: " + Arrays.toString(actions));
-                else
+                else {
+                    logger.exiting(getClass().getName(), "promptAction");
                     return returnedAction;
+                }
             }
             catch (IllegalArgumentException e)
             {
+                logger.throwing(getClass().getName(), "promptAction", e);
                 System.out.print("Input not valid, try again: " + Arrays.toString(actions));
             }
         }
@@ -226,6 +261,7 @@ public class CLIView extends ViewBase
     @Override
     public boolean promptKeepPlaying()
     {
+        logger.entering(getClass().getName(), "promptKeepPlaying");
         System.out.print("Would you like to keep playing? [Y/N]: ");
         String line;
 
@@ -233,10 +269,14 @@ public class CLIView extends ViewBase
         {
             line = lineScanner();
 
-            if (line.equalsIgnoreCase("Y"))
+            if (line.equalsIgnoreCase("Y")) {
+                logger.exiting(getClass().getName(), "promptKeepPlaying");
                 return true;
-            else if (line.equalsIgnoreCase("N"))
+            }
+            else if (line.equalsIgnoreCase("N")) {
+                logger.exiting(getClass().getName(), "promptKeepPlaying");
                 return false;
+            }
             else
                 System.out.print("Input not valid, try again: ");
         }
@@ -248,7 +288,9 @@ public class CLIView extends ViewBase
     @Override
     public void displayDouble()
     {
+        logger.entering(getClass().getName(), "displayDouble");
         System.out.println("You doubled your bet!");
+        logger.exiting(getClass().getName(), "displayDouble");
     }
 
     /**
@@ -258,14 +300,16 @@ public class CLIView extends ViewBase
      */
     public String lineScanner()
     {
+        logger.entering(getClass().getName(), "lineScanner");
         String line = input.nextLine();
 
         if (line.equalsIgnoreCase("quit"))
         {
+            logger.info("Player has chosen to quit the game, closing the program...");
             displayQuit();
             System.exit(0);
         }
-
+        logger.exiting(getClass().getName(), "lineScanner");
         return line;
     }
 
@@ -277,16 +321,17 @@ public class CLIView extends ViewBase
      */
     public int validateInteger(String str)
     {
-        while (true)
-        {
-            try
-            {
-                return Integer.parseInt(str);
-            }
-            catch (NumberFormatException ex)
-            {
-                System.out.print("Integer input not valid, try again: ");
+        int result;
+        logger.entering(getClass().getName(), "validateInteger");
 
+        while (true) {
+            try {
+                result = Integer.parseInt(str);
+                logger.exiting(getClass().getName(), "validateInteger");
+                return result;
+            } catch (NumberFormatException ex) {
+                logger.throwing(getClass().getName(), "validateInteger", ex);
+                System.out.print("Integer input not valid, try again: ");
                 str = lineScanner();
             }
         }
