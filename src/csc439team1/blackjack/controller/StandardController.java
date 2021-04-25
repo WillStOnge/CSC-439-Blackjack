@@ -16,7 +16,7 @@ public class StandardController extends ControllerBase
 	private final int BET_RETURNED;
 	private final Player player;
 	private final Shoe shoe;
-	private final Logger logger = Logger.getLogger(this.getClass().getName());
+	private final Logger logger;
 
 
 	/**
@@ -27,11 +27,12 @@ public class StandardController extends ControllerBase
 	public StandardController(ViewBase view)
 	{
 		super(view);
-		logger.entering(getClass().getName(), "constructor");
+		logger = Logger.getLogger(this.getClass().getName());
+		logger.entering(getClass().getName(), "StandardController constructor");
 		player = new Player();
 		shoe = new Shoe(3);
 		BET_RETURNED = 2;
-		logger.exiting(getClass().getName(), "constructor");
+		logger.exiting(getClass().getName(), "StandardController constructor");
 
 	}
 
@@ -159,12 +160,14 @@ public class StandardController extends ControllerBase
 		// Check for any busts.
 		if (player.score() > 21)
 		{
+			logger.info("Player busted with: " + player.score());
 			view.displayBust(player);
 			view.displayWinner(dealer);
 			player.setBet(0);
 		}
 		else if (dealer.score() > 21)
 		{
+			logger.info("Dealer busted with: " + dealer.score());
 			view.displayBust(dealer);
 			view.displayWinner(player);
 			player.addChips(player.getBet() * BET_RETURNED);
@@ -175,11 +178,13 @@ public class StandardController extends ControllerBase
 			// If nobody busted, check for the winner or a push.
 			if (dealer.score() > player.score())
 			{
+				logger.info("Player won: " + player.score() + " to " + dealer.score());
 				view.displayWinner(dealer);
 				player.setBet(0);
 			}
 			else if (dealer.score() < player.score())
 			{
+				logger.info("Dealer won: " + dealer.score() + " to " + player.score());
 				view.displayScore(dealer);
 				view.displayWinner(player);
 				player.addChips(player.getBet() * BET_RETURNED);
@@ -187,6 +192,7 @@ public class StandardController extends ControllerBase
 			}
 			else
 			{
+				logger.info("Game resulted in a tie");
 				view.displayTie(player.score());
 				player.addChips(player.getBet());
 				player.setBet(0);

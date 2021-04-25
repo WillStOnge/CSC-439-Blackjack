@@ -15,19 +15,20 @@ public abstract class ControllerBase
 {
 	protected final ViewBase view;
 	protected final Dealer dealer;
-	private final Logger logger = Logger.getLogger(this.getClass().getName());
 
 	/**
 	 * Controller constructor which allows the user to specify the view type.
 	 *
 	 * @param view the desired view for user interaction.
 	 */
+
 	protected ControllerBase(ViewBase view)
 	{
-		logger.entering(getClass().getName(), "constructor");
+		Logger logger = Logger.getLogger(this.getClass().getName());
+		logger.entering(getClass().getName(), "ControllerBase constructor");
 		this.view = view;
 		this.dealer = new Dealer();
-		logger.exiting(getClass().getName(), "constructor");
+		logger.exiting(getClass().getName(), "ControllerBase constructor");
 	}
 
 	/**

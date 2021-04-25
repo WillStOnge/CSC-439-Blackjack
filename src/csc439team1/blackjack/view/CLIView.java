@@ -18,16 +18,17 @@ import java.util.logging.Logger;
 public class CLIView extends ViewBase
 {
     Scanner input;
-    private final Logger logger = Logger.getLogger(this.getClass().getName());
+    private final Logger logger;
 
     /**
      * Sets up the console scanner for the view.
      */
     public CLIView()
     {
-        logger.entering(getClass().getName(), "constructor");
+        logger = Logger.getLogger(this.getClass().getName());
+        logger.entering(getClass().getName(), "CLIView constructor");
         input = new Scanner(System.in);
-        logger.exiting(getClass().getName(), "constructor");
+        logger.exiting(getClass().getName(), "CLIView constructor");
 
     }
 
@@ -246,7 +247,7 @@ public class CLIView extends ViewBase
             }
             catch (IllegalArgumentException e)
             {
-                logger.throwing(getClass().getName(), "promptAction", e);
+                logger.warning("CLIView promptAction: " + e.getMessage());
                 System.out.print("Input not valid, try again: " + Arrays.toString(actions));
             }
         }
@@ -301,6 +302,7 @@ public class CLIView extends ViewBase
     public String lineScanner()
     {
         logger.entering(getClass().getName(), "lineScanner");
+        logger.info("Reading input from player");
         String line = input.nextLine();
 
         if (line.equalsIgnoreCase("quit"))
@@ -319,6 +321,7 @@ public class CLIView extends ViewBase
      * @param str the input to be validated
      * @return the validated input
      */
+
     public int validateInteger(String str)
     {
         int result;
@@ -330,7 +333,7 @@ public class CLIView extends ViewBase
                 logger.exiting(getClass().getName(), "validateInteger");
                 return result;
             } catch (NumberFormatException ex) {
-                logger.throwing(getClass().getName(), "validateInteger", ex);
+                logger.warning("CLIView validateInteger: " + ex.getMessage());
                 System.out.print("Integer input not valid, try again: ");
                 str = lineScanner();
             }

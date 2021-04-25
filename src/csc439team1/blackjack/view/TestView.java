@@ -167,12 +167,14 @@ public class TestView extends ViewBase
 		logger.entering(getClass().getName(), "promptKeepPlaying");
 		if (!keepPlaying)
 		{
+			logger.info("Player chose to keep playing");
 			keepPlaying = true;
 
 			logger.exiting(getClass().getName(), "promptKeepPlaying");
 			return true;
 		}
 		else {
+			logger.info("Player chose not to keep playing");
 			logger.exiting(getClass().getName(), "promptKeepPlaying");
 			return false;
 		}
@@ -195,8 +197,8 @@ public class TestView extends ViewBase
 	public void setBet(int bet)
 	{
 		logger.entering(getClass().getName(), "setBet");
-		logger.exiting(getClass().getName(), "setBet");
 		this.bet = bet;
+		logger.exiting(getClass().getName(), "setBet");
 	}
 
 	/**
@@ -207,8 +209,8 @@ public class TestView extends ViewBase
 	public void setChips(int chips)
 	{
 		logger.entering(getClass().getName(), "setChips");
-		logger.exiting(getClass().getName(), "setChips");
 		this.chips = chips;
+		logger.exiting(getClass().getName(), "setChips");
 	}
 
 	/**
@@ -219,7 +221,7 @@ public class TestView extends ViewBase
 	public void setAction(Action action)
 	{
 		logger.entering(getClass().getName(), "setAction");
-		logger.exiting(getClass().getName(), "setAction");
 		this.action = action;
+		logger.exiting(getClass().getName(), "setAction");
 	}
 }
