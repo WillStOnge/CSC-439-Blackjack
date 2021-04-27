@@ -21,10 +21,10 @@ public class Player extends PlayerBase
 	{
 		super();
 		logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "Player");
+		logger.entering(getClass().getName(), "Player constructor");
 		chips = 0;
 		bet = 0;
-		logger.exiting(getClass().getName(), "Player");
+		logger.exiting(getClass().getName(), "Player constructor");
 	}
 
 	/**

@@ -19,9 +19,9 @@ public abstract class PlayerBase
 	public PlayerBase()
 	{
 		logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "PlayerBase");
+		logger.entering(getClass().getName(), "PlayerBase constructor");
 		hand = new Hand();
-		logger.exiting(getClass().getName(), "PlayerBase");
+		logger.exiting(getClass().getName(), "PlayerBase constructor");
 	}
 
 	/**

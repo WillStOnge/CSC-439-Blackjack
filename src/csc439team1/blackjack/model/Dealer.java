@@ -18,7 +18,7 @@ public class Dealer extends PlayerBase
 	{
 		super();
 		Logger logger = Logger.getLogger(getClass().getName());
-		logger.entering(getClass().getName(), "Dealer");
-		logger.exiting(getClass().getName(), "Dealer");
+		logger.entering(getClass().getName(), "Dealer constructor");
+		logger.exiting(getClass().getName(), "Dealer constructor");
 	}
 }
